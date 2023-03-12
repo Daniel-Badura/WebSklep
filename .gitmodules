@@ -1,7 +1,3 @@
 [submodule "frontend"]
-	path = ./frontend
-	url = git://foo.com/git/lib.git
-
-[submodule "backend"]
-	path = ./backend
-	url = git://bar.com/git/lib.git
+	path = frontend
+	url = https://github.com/Daniel-Badura/WebSklep-Frontend
