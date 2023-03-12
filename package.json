@@ -1,0 +1,28 @@
+{
+  "name": "websklep",
+  "version": "1.0.0",
+  "description": "Shopping Cart App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniel-Badura/WebSklep.git"
+  },
+  "keywords": [
+    "MERN",
+    "E-Commerce",
+    "Backend"
+  ],
+  "author": "Daniel Badura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daniel-Badura/WebSklep/issues"
+  },
+  "homepage": "https://github.com/Daniel-Badura/WebSklep#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
