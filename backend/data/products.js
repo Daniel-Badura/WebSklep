@@ -119,18 +119,6 @@ const products = [
     rating: 5,
     numReviews: 12,
   },
-  {
-    name: 'Gravimetric Inverter:',
-    image: '/images/gravity-inverter.jpg',
-    description:
-      'Device that can manipulate gravitational forces, allowing users to create artificial gravity fields or even reverse the effects of gravity altogether',
-    brand: 'Logitech',
-    category: 'Electronics',
-    price: 49.99,
-    countInStock: 7,
-    rating: 3.5,
-    numReviews: 10,
-  }
 ];
 
 export default products;
