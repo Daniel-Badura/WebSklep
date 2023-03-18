@@ -7,6 +7,8 @@ import productRoutes from './routes/productRoutes.js';
 import { errorHandler, notFound, } from './middleware/errorMiddleware.js';
 
 
+const app = express();
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/build')));
     app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')));
@@ -22,7 +24,7 @@ dotenv.config();
 connectDB();
 
 // @desc Start Express Application //
-const app = express();
+
 
 
 
