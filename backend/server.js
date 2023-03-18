@@ -7,6 +7,15 @@ import productRoutes from './routes/productRoutes.js';
 import { errorHandler, notFound, } from './middleware/errorMiddleware.js';
 
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')));
+} else {
+    app.get('/', (req, res) => {
+        res.send('API');
+    });
+}
+
 dotenv.config();
 
 // @desc Start DataBase Connection //
@@ -17,9 +26,7 @@ const app = express();
 
 
 
-app.get('/', (req, res) => {
-    res.send('API');
-});
+
 
 app.use('/api/products', productRoutes);
 
