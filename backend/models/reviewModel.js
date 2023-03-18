@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const reviewSchema = mongoose.Schema({
+export const reviewSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -21,6 +21,4 @@ const reviewSchema = mongoose.Schema({
 );
 
 
-const Review = mongoose.model('Review', reviewSchema);
-
-export default Review;
+export const Review = mongoose.model('Review', reviewSchema);
