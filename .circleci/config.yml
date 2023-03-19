@@ -3,15 +3,6 @@ orbs:
   node: circleci/node@4.7
   heroku: circleci/heroku@2.0.0
 jobs:
-  heroku_deploy:
-    jobs:
-      - build
-      - heroku/deploy-via-git:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
   build:
     docker:
       - image: cimg/base:2023.03
