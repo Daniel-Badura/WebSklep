@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@4.7
   heroku: circleci/heroku@2.0.0
 jobs:
-heroku_deploy:
+  heroku_deploy:
     jobs:
       - build
       - heroku/deploy-via-git:  
