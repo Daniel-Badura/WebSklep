@@ -3,29 +3,16 @@ orbs:
   node: circleci/node@4.7
   heroku: circleci/heroku@2.0.0
 jobs:
-  build:
+  build-and-test:
     docker:
       - image: cimg/base:2023.03
     steps:
       - checkout
-      - node/install-npm
       - node/install-packages
-
       - run:
           name: Run tests
           command: npm test
-  test:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "this is the test job"
 workflows:
-  build_and_test:
-    jobs:
-      - build
-      - test
-
   heroku_deploy:
     jobs:
       - heroku/deploy-via-git
