@@ -70,7 +70,7 @@ const ProductScreen = ({ history }) => {
                                         <Col>
                                             <strong>
                                                 {product.countInStock > 0
-                                                    ? 'In Stock'
+                                                    ? `In Stock: ${product.countInStock}`
                                                     : 'Out of Stock'}
                                             </strong></Col>
                                     </Row>
