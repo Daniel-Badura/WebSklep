@@ -8,7 +8,7 @@ import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
 
 
-const ProductScreen = ({ history }) => {
+const ProductScreen = () => {
 
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
@@ -19,7 +19,8 @@ const ProductScreen = ({ history }) => {
     const navigate = useNavigate();
     useEffect(() => {
         dispatch(listProductDetails(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
+
 
     const addToCartHandler = () => {
         navigate(`/cart/${id}?qty=${quantity}`);
