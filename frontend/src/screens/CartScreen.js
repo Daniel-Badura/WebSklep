@@ -3,7 +3,7 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap';
 import Message from '../components/Message';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 
 
@@ -14,7 +14,7 @@ const CartScreen = () => {
     const dispatch = useDispatch();
     const quantity = location.search ? new URLSearchParams(location.search).get('qty') : 1;
     const cart = useSelector(state => state.cart);
-    const { cartItems } = cart;
+    const { cartItems } = cart ? cart : [1];
 
     useEffect(() => {
         if (id) {
@@ -23,8 +23,12 @@ const CartScreen = () => {
     }, [dispatch, id, quantity]);
 
     const removeFromCartHandler = (id => {
-        console.log('remove');
+        dispatch(removeFromCart(id));
     });
+    const checkoutHandler = (id => {
+        console.log('checkout');
+    });
+
     return (
         <Row>
             <Col md={8}>
@@ -51,16 +55,25 @@ const CartScreen = () => {
                                     <Col md={2}>
                                         <Form.Control
                                             as='select'
-                                            value={quantity}
+                                            value={item.quantity}
                                             onChange={(e) => dispatch(addToCart(item.product,
-                                                Number(e.terget.value)))}
+                                                Number(e.target.value)))}
                                         >
-                                            {[...Array(item.countInStock).keys()].map((x) => (<option key={x = 1} value={x + 1}>{x + 1}</option>))}
+                                            {[...Array(item.countInStock).keys()].map((x) => (
+                                                <option
+                                                    key={x + 1}
+                                                    value={x + 1}
+                                                >
+                                                    {x + 1}
+                                                </option>))}
 
                                         </Form.Control>
                                     </Col>
                                     <Col md={2}>
-                                        <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.product)}
+                                        <Button
+                                            type='button'
+                                            variant='light'
+                                            onClick={() => removeFromCartHandler(item.product)}
                                         >
                                             <i className='fas fa-trash'>Delete</i>
                                         </Button>
@@ -76,8 +89,16 @@ const CartScreen = () => {
                 <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2> Subtotal</h2>
+                            <h3>
+                                Subtotal ({cartItems.reduce((accumulator, item) => accumulator + parseInt(item.quantity), 0)}) items
+                            </h3>
+                            €{cartItems.reduce((accumulator, item) => accumulator + item.quantity * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
+                        <ListGroupItem>
+                            <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
+                                Checkout
+                            </Button>
+                        </ListGroupItem>
                     </ListGroup>
                 </Card>
             </Col>

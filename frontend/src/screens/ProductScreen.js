@@ -81,7 +81,7 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>
-                                                quantity
+                                                Quantity
                                             </Col>
                                             <Col>
                                                 <Form.Control

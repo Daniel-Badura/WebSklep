@@ -13,7 +13,10 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     cart: cartReducer,
 });
+
+// localStorage.clear();
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
+
 
 const initialState = {
 
