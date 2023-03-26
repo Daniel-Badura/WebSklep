@@ -8,6 +8,7 @@ import {
     PRODUCT_DETAILS_FAIL,
 } from '../constants/productConstats.js';
 
+
 export const listProducts = () => async (dispatch, getState) => {
 
     try {

@@ -4,12 +4,13 @@ import colors from "colors";
 import path from 'path';
 import connectDB from "./config/db.js";
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { errorHandler, notFound, } from './middleware/errorMiddleware.js';
-
 
 const app = express();
 
-
+// Use json
+app.use(express.json());
 // @desc initialize .env
 dotenv.config();
 
@@ -19,6 +20,8 @@ connectDB();
 
 // @desc Start Express Application //
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+
 
 const __dirname = path.resolve();
 

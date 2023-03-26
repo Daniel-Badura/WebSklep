@@ -24,6 +24,8 @@ const importData = async () => {
             return { ...product, user: adminUser };
         });
         await Product.insertMany(sampleProducts);
+
+        // console.log('Admin user:'.green.inverse + adminUser);
         console.log('Data successfully imported!'.green.inverse);
     } catch (error) {
         console.error(`${error}`.red.inverse);
