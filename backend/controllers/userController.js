@@ -19,7 +19,7 @@ export const authUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(401);
-        throw new Error('Invalid username or password' + " username " + await User.findOne({ email }));
+        throw new Error('Invalid username or password');
     }
 });
 
