@@ -1,4 +1,12 @@
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "../constants/userConstants";
+import {
+    USER_LOGIN_FAIL,
+    USER_LOGIN_REQUEST,
+    USER_LOGIN_SUCCESS,
+    USER_LOGOUT,
+    USER_REGISTER_REQUEST,
+    USER_REGISTER_SUCCESS,
+    USER_REGISTER_FAIL,
+} from "../constants/userConstants";
 import axios from 'axios';
 
 export const login = (email, password) => async (dispatch) => {
@@ -20,7 +28,7 @@ export const login = (email, password) => async (dispatch) => {
             type: USER_LOGIN_SUCCESS,
             payload: data
         });
-        localStorage.setItem('user', JSON.stringify());
+        localStorage.setItem('userInfo', JSON.stringify());
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
@@ -32,8 +40,43 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('userInfo');
     dispatch({
         type: USER_LOGOUT
     });
+};
+
+
+export const register = (email, password, name, lastname, phone, isAdmin) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_REGISTER_REQUEST
+        });
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const { data } = await axios.post(
+            '/api/users',
+            { name, password, email, lastname, phone, isAdmin },
+            config
+        );
+        dispatch({
+            type: USER_REGISTER_SUCCESS,
+            payload: data
+        });
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        });
+        localStorage.setItem('userInfo', JSON.stringify());
+    } catch (error) {
+        dispatch({
+            type: USER_REGISTER_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
 };

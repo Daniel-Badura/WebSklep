@@ -49,7 +49,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 // @access      Public
 export const registerUser = asyncHandler(async (req, res) => {
 
-    const { email, password, name, lastname, phone, isAdmin } = req.body;
+    const { name, lastname, password, email, phone, isAdmin } = req.body;
     const checkUser = await User.findOne({ email });
     if (checkUser) {
         res.status(400);
