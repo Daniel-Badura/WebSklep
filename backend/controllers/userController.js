@@ -1,13 +1,14 @@
 import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js';
 import token from "../utils/token.js";
-
+import bcrypt from 'bcryptjs';
 // @desc        Authenticate user and get the token
 // @route       POST /api/users/login
 // @access      Public
 export const authUser = asyncHandler(async (req, res) => {
 
     const { email, password } = req.body;
+    console.log(email, password);
     const user = await User.findOne({ email });
     if (user && (await user.checkPassword(password))) {
         res.json({
@@ -19,7 +20,7 @@ export const authUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(401);
-        throw new Error('Invalid username or password');
+        throw new Error('Invalid email or password');
     }
 });
 
@@ -37,6 +38,32 @@ export const getUserProfile = asyncHandler(async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
         });
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+    res.send("good");
+});
+
+// @desc        Update user profile
+// @route       PUT /api/users/profile
+// @access      Private
+export const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+
+        const updateUser = await user.save();
+        res.json({
+            _id: updateUser._id,
+            name: updateUser.name,
+            email: updateUser.email,
+            isAdmin: updateUser.isAdmin,
+            password: bcrypt.hashSync(req.body.newPassword, 10),
+        });
+
     } else {
         res.status(404);
         throw new Error('User not found');

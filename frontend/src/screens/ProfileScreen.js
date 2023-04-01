@@ -1,15 +1,14 @@
 import React, { useState, useEffect, } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { register } from '../actions/userActions';
+import { getUserDetails } from '../actions/userActions';
 
 
 
-const RegisterScreen = () => {
+const ProfileScreen = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -18,33 +17,41 @@ const RegisterScreen = () => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
 
 
-    const userRegister = useSelector(state => state.userRegister);
-    const { loading, error, userInfo } = userRegister;
+    const userDetails = useSelector(state => state.userDetails);
+    const { loading, error, user } = userDetails;
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
 
     useEffect(() => {
-        if (userInfo) {
+        if (!userInfo) {
             navigate(redirect);
+        } else {
+            if (!user) {
+                dispatch(getUserDetails('profile'));
+            } else {
+                setName(user.name);
+                setEmail(user.email);
+            }
         }
-    }, [navigate, userInfo, redirect]);
+    }, [navigate, user, redirect, userInfo, dispatch]);
     const submitHandler = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             setMessage('Passwords do not match');
         } else {
-            setMessage(null);
-            dispatch(register({ name, lastname, email, password, phone, isAdmin }));
+            // DISPATCH PROFILE
         }
 
     };
     return (
-        <FormContainer>
+        <Row><Col md={3}>
             <h1>
                 Register
             </h1>
@@ -95,7 +102,7 @@ const RegisterScreen = () => {
                     ></Form.Control>
                 </Form.Group>
 
-                {/* {userInfo.isAdmin && userInfo ?
+                {/* {user.isAdmin ?
                     <Form.Group controlId='isAdmin'>
                         <Form.Label>is Admin?</Form.Label>
                         <Form.Check
@@ -131,15 +138,12 @@ const RegisterScreen = () => {
                     Submit
                 </Button>
             </Form>
-            <Row>
-                <Col>
-                    <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-                        Have an account?{' '}
-                    </Link>
-                </Col>
-            </Row>
-        </FormContainer >
+        </Col>
+            <Col md={9}>
+                <h2> My Orders </h2>
+            </Col>
+        </Row >
     );
 };
 
-export default RegisterScreen;
+export default ProfileScreen;

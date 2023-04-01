@@ -6,6 +6,9 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
 } from "../constants/userConstants";
 import axios from 'axios';
 
@@ -47,7 +50,7 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const register = (name, password, email, lastname, phone, isAdmin) => async (dispatch) => {
+export const register = ({ name, lastname, email, phone, password, isAdmin }) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -59,7 +62,7 @@ export const register = (name, password, email, lastname, phone, isAdmin) => asy
         };
         const { data } = await axios.post(
             '/api/users',
-            { name, password, email, lastname, phone, isAdmin },
+            { name, lastname, email, phone, password, isAdmin },
             config
         );
         dispatch({
@@ -76,6 +79,35 @@ export const register = (name, password, email, lastname, phone, isAdmin) => asy
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+export const getUserDetails = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_DETAILS_REQUEST,
+        });
+        const { userLogin: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo}`
+            }
+        };
+        const { data } = await axios.get(
+            '/api/users',
+            config
+        );
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_DETAILS_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,
