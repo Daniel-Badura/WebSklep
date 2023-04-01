@@ -50,7 +50,7 @@ const RegisterScreen = () => {
             </h1>
             {message && <Message variant='danger'> {message} </Message>}
             { }
-            {error && error.split(',').map(errorMessage => <Message variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
+            {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
             {/* {error && <Message variant='danger'> {error} </Message>} */}
             {loading && <Loader />}
 

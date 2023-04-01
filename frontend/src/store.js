@@ -17,7 +17,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer
 
 });
-
+// localStorage.removeItem('userInfo');
 const cartItemsFromStorage = localStorage.getItem('cartItems')
     ? JSON.parse(localStorage.getItem('cartItems'))
     : [];
