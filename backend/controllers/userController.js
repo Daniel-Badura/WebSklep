@@ -13,7 +13,9 @@ export const authUser = asyncHandler(async (req, res) => {
         res.json({
             _id: user._id,
             name: user.name,
+            lastname: user.lastname,
             email: user.email,
+            phone: user.phone,
             isAdmin: user.isAdmin,
             token: token(user._id),
         });
