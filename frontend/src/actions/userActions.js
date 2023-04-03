@@ -73,7 +73,6 @@ export const register = ({ name, lastname, email, phone, password, isAdmin }) =>
             type: USER_LOGIN_SUCCESS,
             payload: data
         });
-        console.log(data);
 
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
@@ -94,11 +93,11 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo}`
+                Authorization: `Bearer ${userInfo.token}`
             }
         };
         const { data } = await axios.get(
-            '/api/users',
+            `/api/users${id}`,
             config
         );
         dispatch({

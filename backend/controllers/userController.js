@@ -8,7 +8,6 @@ import bcrypt from 'bcryptjs';
 export const authUser = asyncHandler(async (req, res) => {
 
     const { email, password } = req.body;
-    console.log(email, password);
     const user = await User.findOne({ email });
     if (user && (await user.checkPassword(password))) {
         res.json({
@@ -35,7 +34,9 @@ export const getUserProfile = asyncHandler(async (req, res) => {
         res.json({
             _id: user._id,
             name: user.name,
+            lastname: user.lastname,
             email: user.email,
+            phone: user.phone,
             isAdmin: user.isAdmin,
         });
     } else {
@@ -54,14 +55,16 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
     if (user) {
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
+        user.lastname = req.body.lastname || user.lastname;
 
         const updateUser = await user.save();
         res.json({
             _id: updateUser._id,
             name: updateUser.name,
+            lastname: updateUser.lastname,
             email: updateUser.email,
-            isAdmin: updateUser.isAdmin,
-            password: bcrypt.hashSync(req.body.newPassword, 10),
+            phone: updateUser.phone,
+            password: bcrypt.hashSync(updateUser.newPassword, 10),
         });
 
     } else {

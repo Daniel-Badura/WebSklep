@@ -8,6 +8,7 @@ import { getUserDetails } from '../actions/userActions';
 
 
 
+
 const ProfileScreen = () => {
 
     const location = useLocation();
@@ -17,10 +18,10 @@ const ProfileScreen = () => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState(null);
-
+    // const [newPassword, setNewPassword] = useState('');
 
     const userDetails = useSelector(state => state.userDetails);
     const { loading, error, user } = userDetails;
@@ -33,21 +34,24 @@ const ProfileScreen = () => {
         if (!userInfo) {
             navigate(redirect);
         } else {
-            if (!user) {
+            if (!userInfo.name) {
                 dispatch(getUserDetails('profile'));
             } else {
-                setName(user.name);
-                setEmail(user.email);
+                setName(userInfo.name);
+                setLastname(userInfo.lastname);
+                setPhone(userInfo.phone);
+                setEmail(userInfo.email);
             }
         }
     }, [navigate, user, redirect, userInfo, dispatch]);
     const submitHandler = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            setMessage('Passwords do not match');
-        } else {
-            // DISPATCH PROFILE
-        }
+        // if (newPassword !== confirmNewPassword) {
+        //     setMessage('Passwords do not match');
+        // } else {
+        //     setName(userInfo.name);
+        //     setEmail(userInfo.email);
+        // }
 
     };
     return (
@@ -114,7 +118,7 @@ const ProfileScreen = () => {
                     </Form.Group>
                     : {}
                 } */}
-
+                {/* 
                 <Form.Group controlId='password' className='pt-2'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -126,16 +130,26 @@ const ProfileScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='confirmPassword' className='pt-2'>
-                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Label> New Password</Form.Label>
                     <Form.Control
                         type='password'
                         placeholder='Confirm Password'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        value=''
+                        onChange={(e) => setNewPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
+
+                <Form.Group controlId='confirmNewPassword' className='pt-2'>
+                    <Form.Label>Confirm New Password</Form.Label>
+                    <Form.Control
+                        type='password'
+                        placeholder='Confirm Password'
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                    ></Form.Control>
+                </Form.Group> */}
                 <Button type='submit' variant='primary' className='text-center my-2'>
-                    Submit
+                    Update
                 </Button>
             </Form>
         </Col>
