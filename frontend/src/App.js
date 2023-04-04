@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
@@ -13,6 +13,8 @@ import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
+
+
   return (
 
     <Router>
@@ -36,4 +38,4 @@ function App() {
   );
 }
 
-export default App;;
+export default App;;;;
