@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserDetails } from '../actions/userActions';
 
 
 
@@ -18,15 +18,17 @@ const ProfileScreen = () => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [confirmNewPassword, setConfirmNewPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState(null);
-    // const [newPassword, setNewPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
     const userDetails = useSelector(state => state.userDetails);
     const { loading, error, user } = userDetails;
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile);
+    const { success } = userUpdateProfile;
 
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
 
@@ -46,21 +48,20 @@ const ProfileScreen = () => {
     }, [navigate, user, redirect, userInfo, dispatch]);
     const submitHandler = (e) => {
         e.preventDefault();
-        // if (newPassword !== confirmNewPassword) {
-        //     setMessage('Passwords do not match');
-        // } else {
-        //     setName(userInfo.name);
-        //     setEmail(userInfo.email);
-        // }
+        if (newPassword !== confirmNewPassword) {
+            setMessage('Passwords do not match');
+        } else {
+            dispatch(updateUserDetails({ id: userInfo._id, name, lastname, email, phone, password, newPassword }));
+        }
 
     };
     return (
         <Row><Col md={3}>
-            <h1>
-                Register
-            </h1>
+            <h2>
+                Update Profile
+            </h2>
             {message && <Message variant='danger'> {message} </Message>}
-            { }
+            {success && <Message variant='success'>Profile successfully updated </Message>}
             {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
             {/* {error && <Message variant='danger'> {error} </Message>} */}
             {loading && <Loader />}
@@ -118,9 +119,9 @@ const ProfileScreen = () => {
                     </Form.Group>
                     : {}
                 } */}
-                {/* 
+
                 <Form.Group controlId='password' className='pt-2'>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Old Password</Form.Label>
                     <Form.Control
                         type='password'
                         placeholder='Enter password'
@@ -134,7 +135,7 @@ const ProfileScreen = () => {
                     <Form.Control
                         type='password'
                         placeholder='Confirm Password'
-                        value=''
+                        value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
@@ -147,7 +148,7 @@ const ProfileScreen = () => {
                         value={confirmNewPassword}
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
                     ></Form.Control>
-                </Form.Group> */}
+                </Form.Group>
                 <Button type='submit' variant='primary' className='text-center my-2'>
                     Update
                 </Button>

@@ -55,10 +55,14 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
+
+        if (await user.checkPassword(req.body.password)) {
+            user.password = req.body.newPassword || user.password;
+        }
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
         user.lastname = req.body.lastname || user.lastname;
-
+        user.phone = req.body.phone || user.phone;
         const updateUser = await user.save();
         res.json({
             _id: updateUser._id,
@@ -66,14 +70,14 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
             lastname: updateUser.lastname,
             email: updateUser.email,
             phone: updateUser.phone,
-            password: bcrypt.hashSync(updateUser.newPassword, 10),
+            isAdmin: updateUser.isAdmin,
+            token: token(updateUser._id),
         });
 
     } else {
         res.status(404);
         throw new Error('User not found');
     }
-    res.send("good");
 });
 
 // @desc        Post new user
@@ -99,8 +103,11 @@ export const registerUser = asyncHandler(async (req, res) => {
         res.status(201).json({
             _id: user._id,
             name: user.name,
+            lastname: user.lastname,
             email: user.email,
+            phone: user.phone,
             isAdmin: user.isAdmin,
+            token: token(user._id),
         });
     } else {
         res.status(400);
