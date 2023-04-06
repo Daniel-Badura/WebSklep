@@ -58,11 +58,12 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
 
         if (await user.checkPassword(req.body.password)) {
             user.password = req.body.newPassword || user.password;
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+            user.lastname = req.body.lastname || user.lastname;
+            user.phone = req.body.phone || user.phone;
+
         }
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
-        user.lastname = req.body.lastname || user.lastname;
-        user.phone = req.body.phone || user.phone;
         const updateUser = await user.save();
         res.json({
             _id: updateUser._id,

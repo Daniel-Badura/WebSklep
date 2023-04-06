@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserDetails } from '../actions/userActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 
 
@@ -24,11 +25,11 @@ const ProfileScreen = () => {
     const [newPassword, setNewPassword] = useState('');
 
     const userDetails = useSelector(state => state.userDetails);
-    const { loading, error, user } = userDetails;
+    const { loading, user } = userDetails;
     const userLogin = useSelector(state => state.userLogin);
-    const { userInfo } = userLogin;
+    const { userInfo, error } = userLogin;
     const userUpdateProfile = useSelector(state => state.userUpdateProfile);
-    const { success } = userUpdateProfile;
+    let { success } = userUpdateProfile;
 
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
 
@@ -36,7 +37,8 @@ const ProfileScreen = () => {
         if (!userInfo) {
             navigate(redirect);
         } else {
-            if (!userInfo.name) {
+            if (!userInfo.name || success) {
+                dispatch({ type: USER_UPDATE_PROFILE_RESET });
                 dispatch(getUserDetails('profile'));
             } else {
                 setName(userInfo.name);
@@ -45,8 +47,9 @@ const ProfileScreen = () => {
                 setEmail(userInfo.email);
             }
         }
-    }, [navigate, user, redirect, userInfo, dispatch]);
+    }, [navigate, user, redirect, userInfo, dispatch, success]);
     const submitHandler = (e) => {
+        success = null;
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
             setMessage('Passwords do not match');
