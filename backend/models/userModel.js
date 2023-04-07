@@ -37,17 +37,17 @@ const userSchema = mongoose.Schema({
 );
 
 userSchema.methods.checkPassword = async function (inputPassword) {
-    return await bcrypt.compareSync(inputPassword, this.password);
+    return bcrypt.compareSync(inputPassword, this.password);
 };
 
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         next();
+        console.log("Called Next".yellow);
+    } else {
+        console.log("Password Changed".yellow);
+        this.password = bcrypt.hashSync(this.password, 10);
     }
-
-    // const salt = await bcrypt.genSalt(10);
-    this.password = bcrypt.hashSync(this.password, 10);
-
 });
 
 const User = mongoose.model('User', userSchema);

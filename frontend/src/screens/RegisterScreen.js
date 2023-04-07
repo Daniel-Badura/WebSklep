@@ -35,6 +35,7 @@ const RegisterScreen = () => {
     }, [navigate, userInfo, redirect]);
     const submitHandler = (e) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
             setMessage('Passwords do not match');
         } else {
@@ -94,19 +95,6 @@ const RegisterScreen = () => {
                         onChange={(e) => setPhone(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
-
-                {/* {userInfo.isAdmin && userInfo ?
-                    <Form.Group controlId='isAdmin'>
-                        <Form.Label>is Admin?</Form.Label>
-                        <Form.Check
-                            type='checkbox'
-                            placeholder='is Admin?'
-                            value={isAdmin}
-                            onChange={(e) => setIsAdmin(e.target.value)}
-                        ></Form.Check>
-                    </Form.Group>
-                    : {}
-                } */}
 
                 <Form.Group controlId='password' className='pt-2'>
                     <Form.Label>Password</Form.Label>

@@ -14,7 +14,6 @@ app.use(express.json());
 // @desc initialize .env
 dotenv.config();
 
-
 // @desc Start DataBase Connection //
 connectDB();
 

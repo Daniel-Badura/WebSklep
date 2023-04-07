@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js';
 import token from "../utils/token.js";
 import bcrypt from 'bcryptjs';
+import colors from 'colors';
 // @desc        Authenticate user and get the token
 // @route       POST /api/users/login
 // @access      Public
@@ -45,40 +46,6 @@ export const getUserProfile = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('User not found');
     }
-    res.send("good");
-});
-
-// @desc        Update user profile
-// @route       PUT /api/users/profile
-// @access      Private
-export const updateUserProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
-
-    if (user) {
-
-        if (await user.checkPassword(req.body.password)) {
-            user.password = req.body.newPassword || user.password;
-            user.name = req.body.name || user.name;
-            user.email = req.body.email || user.email;
-            user.lastname = req.body.lastname || user.lastname;
-            user.phone = req.body.phone || user.phone;
-
-        }
-        const updateUser = await user.save();
-        res.json({
-            _id: updateUser._id,
-            name: updateUser.name,
-            lastname: updateUser.lastname,
-            email: updateUser.email,
-            phone: updateUser.phone,
-            isAdmin: updateUser.isAdmin,
-            token: token(updateUser._id),
-        });
-
-    } else {
-        res.status(404);
-        throw new Error('User not found');
-    }
 });
 
 // @desc        Post new user
@@ -113,5 +80,44 @@ export const registerUser = asyncHandler(async (req, res) => {
     } else {
         res.status(400);
         throw new Error('Invalid user data');
+    }
+});
+
+// @desc        Update user profile
+// @route       PUT /api/users/profile
+// @access      Private
+export const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        console.log(user);
+        if (await user.checkPassword(req.body.password)) {
+            console.log("Password Confirmed".green);
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+            user.lastname = req.body.lastname || user.lastname;
+            user.phone = req.body.phone || user.phone;
+            if (req.body.newPassword) {
+                user.password = req.body.newPassword;
+            } else {
+
+            }
+
+        } else { throw new Error('Password incorrect'); }
+        const userUpdated = await user.save();
+        console.log(user);
+        res.json({
+            _id: userUpdated._id,
+            name: userUpdated.name,
+            lastname: userUpdated.lastname,
+            email: userUpdated.email,
+            phone: userUpdated.phone,
+            isAdmin: userUpdated.isAdmin,
+            token: token(userUpdated._id),
+        });
+
+    } else {
+        res.status(404);
+        throw new Error('User not found');
     }
 });

@@ -27,9 +27,9 @@ const ProfileScreen = () => {
     const userDetails = useSelector(state => state.userDetails);
     const { loading, user } = userDetails;
     const userLogin = useSelector(state => state.userLogin);
-    const { userInfo, error } = userLogin;
+    const { userInfo } = userLogin;
     const userUpdateProfile = useSelector(state => state.userUpdateProfile);
-    let { success } = userUpdateProfile;
+    let { success, error } = userUpdateProfile;
 
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
 
@@ -37,26 +37,25 @@ const ProfileScreen = () => {
         if (!userInfo) {
             navigate(redirect);
         } else {
-            if (!userInfo.name || success) {
+            if (!user || !user.name) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET });
                 dispatch(getUserDetails('profile'));
             } else {
-                setName(userInfo.name);
-                setLastname(userInfo.lastname);
-                setPhone(userInfo.phone);
-                setEmail(userInfo.email);
+                setName(user.name);
+                setLastname(user.lastname);
+                setPhone(user.phone);
+                setEmail(user.email);
             }
         }
     }, [navigate, user, redirect, userInfo, dispatch, success]);
     const submitHandler = (e) => {
-        success = null;
+        setMessage(null);
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
             setMessage('Passwords do not match');
         } else {
-            dispatch(updateUserDetails({ id: userInfo._id, name, lastname, email, phone, password, newPassword }));
+            dispatch(updateUserDetails({ id: user._id, name, lastname, email, phone, password, newPassword }));
         }
-
     };
     return (
         <Row><Col md={3}>
@@ -65,7 +64,9 @@ const ProfileScreen = () => {
             </h2>
             {message && <Message variant='danger'> {message} </Message>}
             {success && <Message variant='success'>Profile successfully updated </Message>}
-            {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
+            {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'>
+                {errorMessage.trim().replace('Path ', '')}
+            </Message>)}
             {/* {error && <Message variant='danger'> {error} </Message>} */}
             {loading && <Loader />}
 
