@@ -11,6 +11,7 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import VerificationScreen from './screens/VerificationScreen';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/profile/:id/verify' element={<VerificationScreen />} />
           </Routes>
         </Container>
       </main>

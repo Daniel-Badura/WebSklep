@@ -26,9 +26,20 @@ const userSchema = mongoose.Schema({
     },
 
     isAdmin: {
-        type: String,
+        type: Boolean,
         required: true,
         default: false
+    },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    verificationCode: {
+        type: String,
+        required: false,
+        default: false,
+        createdAt: { type: Date, expires: '1d', default: Date.now }
     }
 },
     {

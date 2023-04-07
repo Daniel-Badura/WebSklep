@@ -12,7 +12,10 @@ import {
     USER_UPDATE_PROFILE_RESET,
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_SUCCESS,
-    USER_UPDATE_PROFILE_REQUEST
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_VERIFY_EMAIL_REQUEST,
+    USER_VERIFY_EMAIL_SUCCESS,
+    USER_VERIFY_EMAIL_FAIL
 
 } from "../constants/userConstants";
 
@@ -68,6 +71,18 @@ export const userUpdateProfileReducer = (state = {}, action) => {
             return { loading: false, error: action.payload };
         case USER_UPDATE_PROFILE_RESET:
             return {};
+        default: return state;
+    }
+};
+
+export const userVerifyEmailReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_VERIFY_EMAIL_REQUEST:
+            return { loading: true };
+        case USER_VERIFY_EMAIL_SUCCESS:
+            return { loading: false, success: true, userInfo: action.payload };
+        case USER_VERIFY_EMAIL_FAIL:
+            return { loading: false, error: action.payload };
         default: return state;
     }
 };

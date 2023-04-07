@@ -38,6 +38,13 @@ const Header = () => {
                                     <NavDropdown.Item onClick={logoutHandler}>
                                         Logout
                                     </NavDropdown.Item>
+                                    {!userInfo.isVerified &&
+                                        <LinkContainer to={`/profile/${userInfo._id}/verify`}>
+                                            <NavDropdown.Item>
+                                                Email Verification
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                    }
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to='/login'>

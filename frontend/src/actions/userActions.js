@@ -12,6 +12,9 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
+    USER_VERIFY_EMAIL_REQUEST,
+    USER_VERIFY_EMAIL_SUCCESS,
+    USER_VERIFY_EMAIL_FAIL,
 } from "../constants/userConstants";
 import axios from 'axios';
 
@@ -146,6 +149,46 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+
+export const verifyEmail = ({ verificationCode, id }) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_VERIFY_EMAIL_REQUEST,
+
+        });
+        const { userLogin: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        };
+        if (id) {
+            const { data } = await axios.get(
+                `/api/users/${id}/verify`,
+                config,
+                verificationCode
+            );
+
+            console.log(data);
+            dispatch({
+                type: USER_VERIFY_EMAIL_SUCCESS,
+                payload: data
+            });
+        } else {
+            dispatch({
+                type: USER_VERIFY_EMAIL_FAIL
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: USER_VERIFY_EMAIL_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

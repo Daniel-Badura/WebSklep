@@ -24,6 +24,7 @@ const ProfileScreen = () => {
     const [message, setMessage] = useState(null);
     const [newPassword, setNewPassword] = useState('');
 
+
     const userDetails = useSelector(state => state.userDetails);
     const { loading, user } = userDetails;
     const userLogin = useSelector(state => state.userLogin);

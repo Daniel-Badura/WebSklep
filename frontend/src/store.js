@@ -5,7 +5,7 @@ import {
     productDetailsReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducer';
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers';
+import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userVerifyEmailReducer } from './reducers/userReducers';
 
 
 const middleware = [thunk];
@@ -17,6 +17,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    userVerifyEmail: userVerifyEmailReducer,
 });
 // localStorage.removeItem('userInfo');web
 const cartItemsFromStorage = localStorage.getItem('cartItems')
