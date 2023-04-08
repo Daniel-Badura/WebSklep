@@ -29,7 +29,7 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
-            <Route path='/profile/:id/verify' element={<VerificationScreen />} />
+            <Route path='/profile/verify' element={<VerificationScreen />} />
           </Routes>
         </Container>
       </main>

@@ -17,12 +17,12 @@ const Header = () => {
 
     return (
         <header >
-            <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
+            <Navbar bg="success" variant='dark' expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand>WebSklep</Navbar.Brand>
                     </LinkContainer>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" variant="success" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <LinkContainer to='/cart'>
@@ -39,7 +39,7 @@ const Header = () => {
                                         Logout
                                     </NavDropdown.Item>
                                     {!userInfo.isVerified &&
-                                        <LinkContainer to={`/profile/${userInfo._id}/verify`}>
+                                        <LinkContainer to='/profile/verify'>
                                             <NavDropdown.Item>
                                                 Email Verification
                                             </NavDropdown.Item>

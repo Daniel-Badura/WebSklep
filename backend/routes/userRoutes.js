@@ -1,7 +1,7 @@
 import express from "express";
 
 const router = express.Router();
-import { authUser, getUserProfile, registerUser, updateUserProfile } from "../controllers/userController.js";
+import { authUser, getEmailVerification, getUserProfile, registerUser, updateUserProfile } from "../controllers/userController.js";
 import { authenticator } from "../middleware/authMiddleware.js";
 
 
@@ -14,7 +14,8 @@ router
     .route('/profile')
     .get(authenticator, getUserProfile)
     .put(authenticator, updateUserProfile);
-
-
+router
+    .route('/profile/verify')
+    .put(authenticator, getEmailVerification);
 
 export default router;

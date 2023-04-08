@@ -35,6 +35,7 @@ const ProfileScreen = () => {
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
 
     useEffect(() => {
+
         if (!userInfo) {
             navigate(redirect);
         } else {
@@ -59,7 +60,7 @@ const ProfileScreen = () => {
         }
     };
     return (
-        <Row><Col md={3}>
+        <Row><Col md={6}>
             <h2>
                 Update Profile
             </h2>
@@ -159,9 +160,9 @@ const ProfileScreen = () => {
                 </Button>
             </Form>
         </Col>
-            <Col md={9}>
+            {/* <Col md={9}>
                 <h2> My Orders </h2>
-            </Col>
+            </Col> */}
         </Row >
     );
 };

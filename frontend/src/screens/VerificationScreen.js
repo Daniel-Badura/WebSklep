@@ -15,16 +15,14 @@ const VerificationScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [verificationCode, setPassword] = useState('');
-
-
     const userLogin = useSelector(state => state.userLogin);
-    const { loading, error, userInfo } = userLogin;
-    const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/login';
-    const id = userInfo._id;
+    const { loading, userInfo, error } = userLogin;
+    const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/profile';
 
     useEffect(() => {
         if (!userInfo) {
-            // console.log(user);
+            navigate(redirect);
+        } else if (userInfo.isVerified) {
             navigate(redirect);
         }
     }, [navigate, userInfo, redirect]);
@@ -33,17 +31,17 @@ const VerificationScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
-        dispatch(verifyEmail({ verificationCode, id }));
+        dispatch(verifyEmail({ verificationCode }));
     };
     return (
-        <FormContainer>
+        <FormContainer >
             <h1>
                 Verify Email Address:
             </h1>
             {error && <Message variant='danger'> {error} </Message>}
+
             {loading && <Loader />}
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} >
                 <Form.Group controlId='verification' className='py-2'>
                     <Form.Control
                         type='text'

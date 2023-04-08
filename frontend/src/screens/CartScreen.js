@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap';
 import Message from '../components/Message';
@@ -12,15 +12,19 @@ const CartScreen = () => {
     const { id } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+    const navigate = useNavigate();
     const quantity = location.search ? new URLSearchParams(location.search).get('qty') : 1;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart ? cart : [1];
 
     useEffect(() => {
+        if (!userInfo.isVerified) { navigate('/profile/verify'); }
         if (id) {
             dispatch(addToCart(id, quantity));
         }
-    }, [dispatch, id, quantity]);
+    }, [dispatch, id, quantity, userInfo, navigate]);
 
     const removeFromCartHandler = (id => {
         dispatch(removeFromCart(id));

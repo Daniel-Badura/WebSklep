@@ -1,7 +1,6 @@
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
 
-dotenv.config();
+
 // create transporter
 export const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -16,15 +15,7 @@ export const transporter = nodemailer.createTransport({
 // send email
 export const mailOptions = {
     from: process.env.SMTP_USER,
-    to: 'daniel.badura@outlook.com',
-    subject: 'Test Email',
-    text: 'This is a test email sent using Nodemailer.'
+    to: '',
+    subject: 'Email Confirmation',
+    text: ''
 };
-
-// transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//         console.error(error);
-//     } else {
-//         console.log('Email sent:', info.response);
-//     }
-// });

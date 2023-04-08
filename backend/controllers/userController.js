@@ -1,9 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from '../models/userModel.js';
 import token from "../utils/token.js";
-import bcrypt from 'bcryptjs';
-import colors from 'colors';
-import { transporter, mailOptions } from "../config/nodemailer.js";
 
 
 // @desc        Authenticate user and get the token
@@ -77,6 +74,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     });
     if (user) {
+
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -98,9 +96,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 // @access      Private
 export const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-
     if (user) {
-        console.log(user);
         if (await user.checkPassword(req.body.password)) {
             console.log("Password Confirmed".green);
             user.name = req.body.name || user.name;
@@ -109,13 +105,10 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
             user.phone = req.body.phone || user.phone;
             if (req.body.newPassword) {
                 user.password = req.body.newPassword;
-            } else {
-
             }
 
         } else { throw new Error('Password incorrect'); }
         const userUpdated = await user.save();
-        console.log(user);
         res.json({
             _id: userUpdated._id,
             name: userUpdated.name,
@@ -125,6 +118,35 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
             token: token(userUpdated._id),
         });
 
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+export const getEmailVerification = asyncHandler(async (req, res) => {
+    const verificationCode = req.body.verificationCode;
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        if (verificationCode === user.verificationCode) {
+            user.isVerified = true;
+            const userUpdated = await user.save();
+            res.json({
+                _id: userUpdated._id,
+                name: userUpdated.name,
+                lastname: userUpdated.lastname,
+                email: userUpdated.email,
+                phone: userUpdated.phone,
+                isVerified: userUpdated.isVerified,
+                token: token(userUpdated._id),
+            });
+        }
+        else {
+
+            res.status(404);
+            throw new Error('Incorrect Verification Code ');
+        }
     } else {
         res.status(404);
         throw new Error('User not found');
