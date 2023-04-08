@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
-
+dotenv.config();
 // create transporter
 export const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,

@@ -25,6 +25,7 @@ const ProfileScreen = () => {
     const [message, setMessage] = useState(null);
     const [newPassword, setNewPassword] = useState('');
     const [changePassword, setChangePassword] = useState(false);
+    const [changeEmail, setChangeEmail] = useState(false);
 
 
     const userDetails = useSelector(state => state.userDetails);
@@ -96,13 +97,21 @@ const ProfileScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='email' className='pt-2'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>
+                        <Form.Check
+                            type='checkbox'
+                            label='Email Address '
+                            checked={changeEmail}
+                            onChange={(e) => setChangeEmail(e.target.checked)}
+
+                        ></Form.Check></Form.Label>
                     <Form.Control
                         type='email'
                         placeholder='Email Address'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className={userInfo ? (userInfo.isVerified ? 'is-valid' : '') : ''}
+                        disabled={!changeEmail}
                     ></Form.Control>
                 </Form.Group>
 

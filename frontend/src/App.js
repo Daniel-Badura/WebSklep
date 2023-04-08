@@ -12,6 +12,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import VerificationScreen from './screens/VerificationScreen';
+import ShippingScreen from './screens/ShippingScreen';
+
 
 function App() {
 
@@ -30,6 +32,7 @@ function App() {
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/profile/verify' element={<VerificationScreen />} />
+            <Route path='/shipping' element={<ShippingScreen />} />
           </Routes>
         </Container>
       </main>
@@ -38,6 +41,6 @@ function App() {
 
 
   );
-}
+};
 
 export default App;;;;
