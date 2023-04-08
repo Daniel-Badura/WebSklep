@@ -43,7 +43,8 @@ const userSchema = mongoose.Schema({
         required: false,
         default: false,
         createdAt: { type: Date, expires: '1d', default: Date.now }
-    }
+    },
+
 },
     {
         timestamps: true

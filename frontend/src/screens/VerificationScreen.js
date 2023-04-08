@@ -16,8 +16,10 @@ const VerificationScreen = () => {
     const navigate = useNavigate();
     const [verificationCode, setPassword] = useState('');
     const userLogin = useSelector(state => state.userLogin);
-    const { loading, userInfo, error } = userLogin;
+    const { loading, userInfo } = userLogin;
     const redirect = location.search ? new URLSearchParams(location.search).get('redirect') : '/profile';
+    const userVerifyEmail = useSelector(state => state.userVerifyEmail);
+
 
     useEffect(() => {
         if (!userInfo) {
@@ -25,6 +27,7 @@ const VerificationScreen = () => {
         } else if (userInfo.isVerified) {
             navigate(redirect);
         }
+        userVerifyEmail.error = null;
     }, [navigate, userInfo, redirect]);
 
 
@@ -34,11 +37,11 @@ const VerificationScreen = () => {
         dispatch(verifyEmail({ verificationCode }));
     };
     return (
-        <FormContainer >
+        <FormContainer>
+
             <h1>
                 Verify Email Address:
             </h1>
-            {error && <Message variant='danger'> {error} </Message>}
 
             {loading && <Loader />}
             <Form onSubmit={submitHandler} >
@@ -53,15 +56,10 @@ const VerificationScreen = () => {
                 <Button type='submit' variant='primary' className='text-center'>
                     Submit
                 </Button>
-            </Form>
-            {/* <Row className='py-2'>
-                <Col>
 
-                    <Link to={redirect ? `/profile/?redirect=${redirect}` : '/profile/'}>
-                        Profile
-                    </Link>
-                </Col>
-            </Row> */}
+            </Form>
+            <div className='py-1'></div>
+            {userVerifyEmail.error && <Message variant='danger'> {userVerifyEmail.error} </Message>}
         </FormContainer>
     );
 };

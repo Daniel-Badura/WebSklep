@@ -18,11 +18,9 @@ const RegisterScreen = () => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
-
 
     const userRegister = useSelector(state => state.userRegister);
     const { loading, error, userInfo } = userRegister;
@@ -40,7 +38,7 @@ const RegisterScreen = () => {
             setMessage('Passwords do not match');
         } else {
             setMessage(null);
-            dispatch(register({ name, lastname, email, password, phone, isAdmin }));
+            dispatch(register({ name, lastname, email, password, phone }));
         }
 
     };

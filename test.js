@@ -3,7 +3,6 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 dotenv.config();
-dburl = process.env.MONGO_URI;
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.on("error", () => {

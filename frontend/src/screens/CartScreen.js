@@ -20,7 +20,7 @@ const CartScreen = () => {
     const { cartItems } = cart ? cart : [1];
 
     useEffect(() => {
-        if (!userInfo.isVerified) { navigate('/profile/verify'); }
+        // if (!userInfo) { } else if ((!userInfo.isVerified)) { navigate('/profile/verify'); }
         if (id) {
             dispatch(addToCart(id, quantity));
         }

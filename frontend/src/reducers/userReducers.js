@@ -80,7 +80,7 @@ export const userVerifyEmailReducer = (state = {}, action) => {
         case USER_VERIFY_EMAIL_REQUEST:
             return { loading: true };
         case USER_VERIFY_EMAIL_SUCCESS:
-            return { loading: false, success: true, userInfo: action.payload };
+            return { loading: false, userInfo: action.payload };
         case USER_VERIFY_EMAIL_FAIL:
             return { loading: false, error: action.payload };
         default: return state;

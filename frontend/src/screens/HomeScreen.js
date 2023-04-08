@@ -23,7 +23,7 @@ const HomeScreen = () => {
     return (
         <>
             <h1>
-                Latest Products
+                Featured Products
             </h1>
             {
                 loading

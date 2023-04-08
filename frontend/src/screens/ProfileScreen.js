@@ -10,6 +10,7 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 
 
+
 const ProfileScreen = () => {
 
     const location = useLocation();
@@ -23,6 +24,7 @@ const ProfileScreen = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState(null);
     const [newPassword, setNewPassword] = useState('');
+    const [changePassword, setChangePassword] = useState(false);
 
 
     const userDetails = useSelector(state => state.userDetails);
@@ -100,6 +102,7 @@ const ProfileScreen = () => {
                         placeholder='Email Address'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        className={userInfo ? (userInfo.isVerified ? 'is-valid' : '') : ''}
                     ></Form.Control>
                 </Form.Group>
 
@@ -113,21 +116,10 @@ const ProfileScreen = () => {
                     ></Form.Control>
                 </Form.Group>
 
-                {/* {user.isAdmin ?
-                    <Form.Group controlId='isAdmin'>
-                        <Form.Label>is Admin?</Form.Label>
-                        <Form.Check
-                            type='checkbox'
-                            placeholder='is Admin?'
-                            value={isAdmin}
-                            onChange={(e) => setIsAdmin(e.target.value)}
-                        ></Form.Check>
-                    </Form.Group>
-                    : {}
-                } */}
+
 
                 <Form.Group controlId='password' className='pt-2'>
-                    <Form.Label>Old Password</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
                         type='password'
                         placeholder='Enter password'
@@ -135,26 +127,35 @@ const ProfileScreen = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
-
-                <Form.Group controlId='confirmPassword' className='pt-2'>
-                    <Form.Label> New Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Confirm Password'
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                    ></Form.Control>
+                <Form.Group controlId='changePassword' className='pt-2'>
+                    <Form.Check
+                        type='checkbox'
+                        label='Change Password'
+                        checked={changePassword}
+                        onChange={(e) => setChangePassword(e.target.checked)}
+                    ></Form.Check>
                 </Form.Group>
+                {changePassword && (<div>
+                    <Form.Group controlId='confirmPassword' className='pt-2'>
+                        <Form.Label> New Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                        ></Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId='confirmNewPassword' className='pt-2'>
-                    <Form.Label>Confirm New Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        placeholder='Confirm Password'
-                        value={confirmNewPassword}
-                        onChange={(e) => setConfirmNewPassword(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
+                    <Form.Group controlId='confirmNewPassword' className='pt-2'>
+                        <Form.Label>Confirm New Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={confirmNewPassword}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        ></Form.Control>
+                    </Form.Group>
+                </div>)}
                 <Button type='submit' variant='primary' className='text-center my-2'>
                     Update
                 </Button>
