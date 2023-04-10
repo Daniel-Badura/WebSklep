@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { saveShippingAddress } from '../actions/cartActions';
+import { useNavigate } from 'react-router-dom';
+import Checkout from '../components/Checkout';
 
 
 const ShippingScreen = () => {
 
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [postalCode, setPostalCode] = useState("");
-    const [country, setCountry] = useState("");
+    const cart = useSelector(state => state.cart);
+    const { shippingAddress } = cart;
 
+    const [address, setAddress] = useState(shippingAddress.address);
+    const [city, setCity] = useState(shippingAddress.city);
+    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+    const [country, setCountry] = useState(shippingAddress.country);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log("Submitted");
+        dispatch(saveShippingAddress({ address, city, postalCode, country }));
+        navigate('/payment');
     };
 
     return (
         <FormContainer>
-            <h1>Shipping</h1>
+            <Checkout step1 step2 />
+            <h1 className='text-center'>Shipping</h1>
 
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={submitHandler} >
 
                 <Form.Group controlId='address' className='pt-2'>
                     <Form.Label>Address</Form.Label>
@@ -63,7 +73,7 @@ const ShippingScreen = () => {
                     ></Form.Control>
                 </Form.Group>
 
-                <Button type='submit' variant='primary' className='text-center my-2'>
+                <Button type='submit' variant='primary' className='text-center my-2 mx-auto d-block '>
                     Submit
                 </Button>
 

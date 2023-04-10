@@ -12,9 +12,10 @@ const CartScreen = () => {
     const { id } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
-    const navigate = useNavigate();
+
     const quantity = location.search ? new URLSearchParams(location.search).get('qty') : 1;
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart ? cart : [1];
@@ -29,8 +30,9 @@ const CartScreen = () => {
     const removeFromCartHandler = (id => {
         dispatch(removeFromCart(id));
     });
+
     const checkoutHandler = (id => {
-        console.log('checkout');
+        navigate('/shipping');
     });
 
     return (
