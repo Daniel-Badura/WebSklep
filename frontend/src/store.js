@@ -19,7 +19,8 @@ const reducer = combineReducers({
     userUpdateProfile: userUpdateProfileReducer,
     userVerifyEmail: userVerifyEmailReducer,
 });
-// localStorage.removeItem('userInfo');web
+// localStorage.removeItem('userInfo'); web;
+// localStorage.removeItem('cartItems'); web;
 const cartItemsFromStorage = localStorage.getItem('cartItems')
     ? JSON.parse(localStorage.getItem('cartItems'))
     : [];

@@ -18,7 +18,7 @@ const CartScreen = () => {
 
     const quantity = location.search ? new URLSearchParams(location.search).get('qty') : 1;
     const cart = useSelector(state => state.cart);
-    const { cartItems } = cart ? cart : [1];
+    const { cartItems } = cart ? cart : [];
 
     useEffect(() => {
         // if (!userInfo) { } else if ((!userInfo.isVerified)) { navigate('/profile/verify'); }
