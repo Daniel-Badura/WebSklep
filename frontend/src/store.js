@@ -6,6 +6,7 @@ import {
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducer';
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userVerifyEmailReducer } from './reducers/userReducers';
+import { orderCreateReducer } from './reducers/orderReducers';
 
 
 const middleware = [thunk];
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userVerifyEmail: userVerifyEmailReducer,
+    orderCreate: orderCreateReducer
 });
 // localStorage.removeItem('userInfo'); web;
 // localStorage.removeItem('cartItems'); web;
@@ -40,7 +42,6 @@ const initialState = {
         cartItems: cartItemsFromStorage,
         shippingAddress: shippingAddressFromStorage,
         itemsPrice: cartItemsFromStorage.reduce((acc, item) => acc + item.price * item.quantity, 0),
-
     },
     userLogin: { userInfo: userInfoFromStorage },
 

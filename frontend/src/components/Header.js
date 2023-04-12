@@ -3,21 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Header = () => {
-
+    const navigate = useNavigate();
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
     const dispatch = useDispatch();
     const logoutHandler = () => {
         dispatch(logout());
+        navigate('/login');
     };
 
     return (
         <header >
-            <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
+            <Navbar bg="dark" variant='dark' expand="md" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand>WebSklep</Navbar.Brand>

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Form, Button, Card, Image, ListGroup, Col, Row, ListGroupItem } from 'react-bootstrap';
-import FormContainer from '../components/FormContainer';
+import React, { useEffect } from 'react';
+import { Card, Image, ListGroup, Col, Row, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveShippingAddress } from '../actions/cartActions';
 import { Link, useNavigate } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import Message from '../components/Message';
+import { createOrder } from '../actions/orderActions';
 
 const PlaceOrderScreen = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const decimalize = (number) => {
         return (Math.round(number * 100) / 100).toFixed(2);
     };
@@ -16,6 +17,28 @@ const PlaceOrderScreen = () => {
     cart.shippingPrice = decimalize(cart.itemsPrice > 100 ? 0 : 100);
     cart.taxPrice = decimalize(Number((0.23 * cart.itemsPrice).toFixed(2)));
     cart.totalPrice = decimalize(Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice));
+
+    const orderCreate = useSelector(state => state.orderCreate);
+    const { order, success, error } = orderCreate;
+
+    useEffect(() => {
+        if (success) {
+            navigate(`/order/${order._id}`);
+        }
+    }, [navigate, success, order]);
+    const placeOrderHandler = () => {
+        dispatch(
+            createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                itemsPrice: cart.itemsPrice,
+                shippingPrice: cart.shippingPrice,
+                taxPrice: cart.taxPrice,
+                totalPrice: cart.totalPrice,
+            }));
+    };
+
     return (
         <>
             <Checkout step1 step2 step3 step4 />
@@ -103,6 +126,19 @@ const PlaceOrderScreen = () => {
                                     <Col>Total:</Col>
                                     <Col>€{cart.totalPrice}</Col>
                                 </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                {error && <Message variant='danger'>{error}</Message>}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Button
+                                    type='button'
+                                    className='btn-block'
+                                    disabled={cart.cartItems === 0}
+                                    onClick={placeOrderHandler}
+                                >
+                                    Submit Order
+                                </Button>
                             </ListGroup.Item>
 
                         </ListGroup>
