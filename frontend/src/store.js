@@ -38,9 +38,11 @@ const initialState = {
 
     cart: {
         cartItems: cartItemsFromStorage,
-        shippingAddress: shippingAddressFromStorage
+        shippingAddress: shippingAddressFromStorage,
+        itemsPrice: cartItemsFromStorage.reduce((acc, item) => acc + item.price * item.quantity, 0),
+
     },
-    userLogin: { user: userInfoFromStorage },
+    userLogin: { userInfo: userInfoFromStorage },
 
 };
 
