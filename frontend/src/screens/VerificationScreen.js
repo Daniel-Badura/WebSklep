@@ -28,7 +28,7 @@ const VerificationScreen = () => {
             navigate(redirect);
         }
         userVerifyEmail.error = null;
-    }, [navigate, userInfo, redirect]);
+    }, [navigate, userInfo, redirect, userVerifyEmail]);
 
 
 

@@ -19,13 +19,13 @@ const PlaceOrderScreen = () => {
     cart.totalPrice = decimalize(Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice));
 
     const orderCreate = useSelector(state => state.orderCreate);
-    const { order, success, error } = orderCreate;
+    const { order, success: orderCreateSuccess, error } = orderCreate;
 
-    useEffect(() => {
-        if (success) {
-            navigate(`/order/${order._id}`);
-        }
-    }, [navigate, success, order]);
+    // useEffect(() => {
+    //     if (orderCreateSuccess) {
+    //         navigate(`/order/${order._id}`);
+    //     }
+    // }, [navigate, orderCreateSuccess, order]);
     const placeOrderHandler = () => {
         dispatch(
             createOrder({
@@ -37,6 +37,7 @@ const PlaceOrderScreen = () => {
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
             }));
+        navigate(`/order/${order._id}`);
     };
 
     return (

@@ -15,7 +15,7 @@ const authenticator = asyncHandler(async (req, res, next) => {
             token = req.headers.authorization.split(' ')[1];
             const verified = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findById(verified.id).select('-password');
-            console.log("login verified".green);
+            console.log(req.user.email + " login verified".green);
             next();
         } catch (error) {
             console.error(error);

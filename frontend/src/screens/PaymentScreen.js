@@ -19,9 +19,6 @@ const PaymentScreen = () => {
 
     const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
-
-
-
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(savePaymentMethod(paymentMethod));
@@ -34,8 +31,6 @@ const PaymentScreen = () => {
             <h1 className='text-center'>Payment Method</h1>
 
             <Form onSubmit={submitHandler} >
-
-
                 <Form.Group>
                     <Form.Label as='legend'>Select Method</Form.Label>
 
