@@ -11,10 +11,14 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import MyOrdersScreen from './screens/MyOrdersScreen';
 import VerificationScreen from './screens/VerificationScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import Message from './components/Message';
+
 
 
 function App() {
@@ -24,7 +28,9 @@ function App() {
 
     <Router>
       <Header />
+      <Message variant='warning'><div className='warning-message'>Please note that this website is intended solely for presentation purposes and should be used judiciously for its intended purpose</div></Message>
       <main className='py-3'>
+
         <Container>
           <Routes>
             <Route path='/' element={<HomeScreen />} />
@@ -33,10 +39,13 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/profile/orders' element={<MyOrdersScreen />} />
             <Route path='/profile/verify' element={<VerificationScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/order/:id' element={<OrderScreen />} />
+
           </Routes>
         </Container>
       </main>

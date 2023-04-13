@@ -13,6 +13,16 @@ h3 {
 .link:hover{
   text-decoration: underline
 }
+.text-centered{
+  text-align: center;
+}
+.warning-message{
+  text-align: center;
+  color:red;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .rating span {
   margin: 0.0rem;
 }
