@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const orderSchema = mongoose.Schema({
+    orderNumber: {
+        type: String,
+        unique: true,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -77,6 +81,20 @@ const orderSchema = mongoose.Schema({
     }
 );
 
+orderSchema.pre('save', function (next) {
+    const order = this;
+    if (!order.orderNumber) {
+        mongoose.model('Order').countDocuments().then(count => {
+            order.orderNumber = ("BADUR" + String(count + 1).padStart(6, '0'));
+            console.log(`created order ${order.orderNumber}`.green);
+            next();
+        }).catch(err => {
+            next(err);
+        });
+    } else {
+        next();
+    }
+});
 
 const Order = mongoose.model('Order', orderSchema);
 

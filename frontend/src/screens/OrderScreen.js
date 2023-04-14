@@ -29,6 +29,7 @@ const OrderScreen = () => {
         if (!userInfo) {
             navigate('/login');
         }
+        console.log(orderId);
         // PAYPAL SCRIPT FETCH AND ADD DYNAMICALLY
         // eslint-disable-next-line
         const addPayPalScript = async () => {
@@ -58,7 +59,7 @@ const OrderScreen = () => {
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
-        dispatch(payOrder(orderId, paymentResult));
+        dispatch(payOrder({ orderId, paymentResult }));
 
     };
 
@@ -67,9 +68,9 @@ const OrderScreen = () => {
         <Message variant='success'>
             <p>To pay for these totally real items, use this totally real paypal account:</p>
             Email ID: sb-av4u217215769@personal.example.com<br />
-            Password: sb-av4u217215769@personal.example.com
+            Password: 1qaz2wsx
         </Message>
-        <h1>Order {order._id}</h1>
+        <h1>Order {order.orderNumber}</h1>
         <Row>
             <Col md={8}>
                 <ListGroup variant='flush'>
