@@ -77,6 +77,7 @@ const CartScreen = () => {
                                     </Col>
                                     <Col md={2}>
                                         <Button
+
                                             type='button'
                                             variant='light'
                                             onClick={() => removeFromCartHandler(item.product)}
@@ -101,7 +102,7 @@ const CartScreen = () => {
                             €{cartItems.reduce((accumulator, item) => accumulator + item.quantity * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
                         <ListGroupItem>
-                            <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
+                            <Button type='button' className='rounded btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
                                 Checkout
                             </Button>
                         </ListGroupItem>

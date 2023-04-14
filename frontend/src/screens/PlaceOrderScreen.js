@@ -21,11 +21,11 @@ const PlaceOrderScreen = () => {
     const orderCreate = useSelector(state => state.orderCreate);
     const { order, success: orderCreateSuccess, error } = orderCreate;
 
-    // useEffect(() => {
-    //     if (orderCreateSuccess) {
-    //         navigate(`/order/${order._id}`);
-    //     }
-    // }, [navigate, orderCreateSuccess, order]);
+    useEffect(() => {
+        if (orderCreateSuccess) {
+            navigate(`/order/${order._id}`);
+        }
+    }, [navigate, orderCreateSuccess, order]);
     const placeOrderHandler = () => {
         dispatch(
             createOrder({
@@ -37,7 +37,7 @@ const PlaceOrderScreen = () => {
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
             }));
-        navigate(`/order/${order._id}`);
+        // navigate(`/order/${order._id}`);
     };
 
     return (
@@ -101,7 +101,7 @@ const PlaceOrderScreen = () => {
                 <Col md={4}>
                     <Card>
                         <ListGroup variant='flush'>
-                            <ListGroup.Item>
+                            <ListGroup.Item className='text-centered'>
                                 <h2>Order Summary</h2>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -128,10 +128,10 @@ const PlaceOrderScreen = () => {
                                     <Col>€{cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
-                                {error && <Message variant='danger'>{error}</Message>}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
+
+                            {error && <ListGroup.Item><Message variant='danger'>{error}</Message></ListGroup.Item>}
+
+                            <ListGroup.Item className='text-centered'>
                                 <Button
                                     type='button'
                                     className='btn-block'
@@ -144,8 +144,8 @@ const PlaceOrderScreen = () => {
 
                         </ListGroup>
                     </Card>
-                </Col>
-            </Row>
+                </Col >
+            </Row >
         </>
     );
 };

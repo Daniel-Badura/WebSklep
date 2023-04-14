@@ -33,6 +33,15 @@ h3 {
 .rounded{
   border-radius: 1rem;
 }
+.form-control{
+  border-radius: 1rem;
+}
+.shadowed{
+  box-shadow: 0 1rem 1rem rgba(253, 94, 1, 0.3);
+}
+button{
+  border-radius: 1rem;
+}
 .card-title{
   height: 3rem
 }

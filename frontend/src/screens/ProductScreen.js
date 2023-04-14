@@ -28,13 +28,13 @@ const ProductScreen = () => {
 
     return (
         <>
-            <Link className='btn btn-warning my-3' to='/'>
+            <Link className='btn btn-warning my-3 rounded' to='/'>
                 Return
             </Link>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                 <Row>
-                    <Col md={6}>
-                        <Image src={product.image} fluid />
+                    <Col md={6} >
+                        <Image className='rounded shadowed' src={product.image} fluid />
                     </Col>
                     <Col md={3}>
                         <ListGroup variant='flush'>
@@ -107,8 +107,8 @@ const ProductScreen = () => {
                                         className=
                                         {
                                             product.countInStock > 0
-                                                ? 'btn-success'
-                                                : 'btn-danger'
+                                                ? 'btn-success '
+                                                : 'btn-danger '
                                         }
                                         type='button'
                                         disabled={

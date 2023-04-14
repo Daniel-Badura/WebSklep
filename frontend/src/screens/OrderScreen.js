@@ -29,7 +29,6 @@ const OrderScreen = () => {
         if (!userInfo) {
             navigate('/login');
         }
-        console.log(orderId);
         // PAYPAL SCRIPT FETCH AND ADD DYNAMICALLY
         // eslint-disable-next-line
         const addPayPalScript = async () => {
@@ -58,9 +57,7 @@ const OrderScreen = () => {
     }, [dispatch, orderId, successPay, sdkReady, loadingPay, order, navigate, userInfo]);
 
     const successPaymentHandler = (paymentResult) => {
-        console.log(paymentResult);
         dispatch(payOrder({ orderId, paymentResult }));
-
     };
 
 

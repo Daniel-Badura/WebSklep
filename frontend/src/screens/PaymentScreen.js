@@ -44,14 +44,14 @@ const PaymentScreen = () => {
                             checked
                             onChange={(element) => setPaymentMethod(element.target.value)}>
                         </Form.Check>
-                        <Form.Check
+                        {/* <Form.Check
                             type='radio'
                             label='Stripe'
                             id='Stripe'
                             name='paymentMethod'
                             value='Stripe'
                             onChange={(element) => setPaymentMethod(element.target.value)}>
-                        </Form.Check>
+                        </Form.Check> */}
                     </Col>
                 </Form.Group>
                 <Button type='submit' variant='primary' className='text-center my-2 mx-auto d-block '>
