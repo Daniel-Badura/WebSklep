@@ -37,15 +37,15 @@ const VerificationScreen = () => {
         dispatch(verifyEmail({ verificationCode }));
     };
     return (
-        <FormContainer>
+        <FormContainer >
 
-            <h1>
-                Verify Email Address:
+            <h1 className='text-centered'>
+                Verify Your Email Address:
             </h1>
-
+            <Message>Enter the verification code sent to your email address:{userInfo.email}</Message>
             {loading && <Loader />}
-            <Form onSubmit={submitHandler} >
-                <Form.Group controlId='verification' className='py-2'>
+            <Form onSubmit={submitHandler} className='text-centered'>
+                <Form.Group controlId='verification' className='py-2 '>
                     <Form.Control
                         type='text'
                         placeholder='Email Verification Code'

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import { getUserDetails } from '../actions/userActions';
 
 
 
@@ -31,9 +32,18 @@ const CartScreen = () => {
         dispatch(removeFromCart(id));
     });
 
-    const checkoutHandler = (id => {
-        navigate('/shipping');
-    });
+    const checkoutHandler = () => {
+        if (!userInfo) {
+            dispatch(getUserDetails());
+        } else {
+            if (!userInfo.isVerified) {
+                navigate('/profile/verify');
+            } else {
+                navigate('/shipping');
+            }
+        }
+
+    };
 
     return (
         <Row>

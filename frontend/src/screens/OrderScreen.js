@@ -62,11 +62,11 @@ const OrderScreen = () => {
 
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : <>
-        <Message variant='success'>
+        {!order.isPaid && <Message variant='success'>
             <p>To pay for these totally real items, use this totally real paypal account:</p>
             Email ID: sb-av4u217215769@personal.example.com<br />
             Password: 1qaz2wsx
-        </Message>
+        </Message>}
         <h1>Order {order.orderNumber}</h1>
         <Row>
             <Col md={8}>

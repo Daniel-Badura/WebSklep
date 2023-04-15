@@ -32,14 +32,6 @@ const Header = () => {
                             </LinkContainer>
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
-                                    <LinkContainer to='/profile'>
-                                        <NavDropdown.Item>
-                                            Profile
-                                        </NavDropdown.Item>
-                                    </LinkContainer>
-                                    <NavDropdown.Item onClick={logoutHandler}>
-                                        Logout
-                                    </NavDropdown.Item>
                                     {!userInfo.isVerified &&
                                         <LinkContainer to='/profile/verify'>
                                             <NavDropdown.Item>
@@ -47,6 +39,20 @@ const Header = () => {
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                     }
+                                    <LinkContainer to='/profile'>
+                                        <NavDropdown.Item>
+                                            Profile
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/profile/orders'>
+                                        <NavDropdown.Item>
+                                            My Orders
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <NavDropdown.Item onClick={logoutHandler}>
+                                        Logout
+                                    </NavDropdown.Item>
+
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to='/login'>
