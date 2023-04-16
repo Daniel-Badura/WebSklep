@@ -51,8 +51,10 @@ const CartScreen = () => {
                 <h1>Shopping Cart</h1>
                 {cartItems.length === 0 ? (
                     <Message>
-                        Your cart is empty -
-                        <Link to='/'>Return </Link>
+                        <div style={{ display: 'flex' }}>
+                            <div style={{ flex: 1 }}>Your cart is empty</div>
+                            <div style={{ flex: 0 }}><Button className={"rounded"} onClick={() => navigate('/')}>Return</Button></div>
+                        </div>
                     </Message>
                 ) : (
                     <ListGroup variant='flush'>

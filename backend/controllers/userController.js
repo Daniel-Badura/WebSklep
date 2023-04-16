@@ -143,7 +143,6 @@ export const getEmailVerification = asyncHandler(async (req, res) => {
             });
         }
         else {
-
             res.status(404);
             throw new Error('Incorrect Verification Code ');
         }
@@ -151,4 +150,9 @@ export const getEmailVerification = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error('User not found');
     }
+});
+
+export const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
 });

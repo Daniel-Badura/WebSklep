@@ -5,7 +5,7 @@ import {
     productDetailsReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducer';
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userVerifyEmailReducer } from './reducers/userReducers';
+import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userVerifyEmailReducer, usersListReducer } from './reducers/userReducers';
 import { orderCreateReducer, orderDetailsReducer, orderMyOrdersReducer, orderPayReducer } from './reducers/orderReducers';
 
 
@@ -19,10 +19,12 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     userVerifyEmail: userVerifyEmailReducer,
+    usersList: usersListReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderMyOrders: orderMyOrdersReducer,
+
 });
 // localStorage.removeItem('userInfo'); web;
 // localStorage.removeItem('cartItems'); web;

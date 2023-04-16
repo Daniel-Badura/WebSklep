@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 
 dotenv.config();
-const authenticator = asyncHandler(async (req, res, next) => {
+export const authenticator = asyncHandler(async (req, res, next) => {
     let token;
     if (
         req.headers.authorization &&
@@ -30,5 +30,11 @@ const authenticator = asyncHandler(async (req, res, next) => {
     }
 });
 
-
-export { authenticator };
+export const isAdmin = asyncHandler(async (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next();
+    } else {
+        res.status(401);
+        throw new Error('User is not an admin');
+    }
+});

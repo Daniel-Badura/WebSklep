@@ -17,6 +17,12 @@ import {
     USER_VERIFY_EMAIL_SUCCESS,
     USER_VERIFY_EMAIL_FAIL,
     USER_DETAILS_RESET,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+    USER_LIST_REQUEST,
+    USER_DELETE_REQUEST,
+    USER_DELETE_SUCCESS,
+    USER_DELETE_FAIL,
 } from "../constants/userConstants";
 import axios from 'axios';
 
@@ -136,7 +142,7 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
             }
         };
         const { data } = await axios.put(
-            `/api/users/profile`,
+            '/api/users/profile',
             user,
             config
         );
@@ -158,6 +164,64 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
         });
     }
 };
+export const deleteUser = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_DELETE_REQUEST,
+        });
+        const { userLogin: { userInfo } } = getState();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        };
+        const { data } = await axios.delete(
+            `/api/users/${id}`,
+            config
+        );
+        dispatch({
+            type: USER_DELETE_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_DELETE_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
+
+export const listUsers = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_LIST_REQUEST,
+        });
+        const { userLogin: { userInfo } } = getState();
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        };
+        const { data } = await axios.get(
+            '/api/users/list',
+            config
+        );
+        dispatch({
+            type: USER_LIST_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};
 
 export const verifyEmail = ({ verificationCode }) => async (dispatch, getState) => {
     try {
@@ -173,7 +237,7 @@ export const verifyEmail = ({ verificationCode }) => async (dispatch, getState) 
         };
         userInfo.verificationCode = verificationCode;
         const { data } = await axios.put(
-            `/api/users/profile/verify`,
+            '/api/users/profile/verify',
             userInfo,
             config,
         );
