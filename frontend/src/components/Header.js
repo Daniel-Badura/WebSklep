@@ -30,6 +30,26 @@ const Header = () => {
                             <LinkContainer to='/cart'>
                                 <Nav.Link ><i className='fas fa-shopping-cart' />Cart</Nav.Link>
                             </LinkContainer>
+                            {/* ADMIN MENU:  */}
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title='ADMIN' id='username'>
+                                    <LinkContainer to='/admin/users/list'>
+                                        <NavDropdown.Item>
+                                            Users List
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/products/list'>
+                                        <NavDropdown.Item>
+                                            Products
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/orders/list'>
+                                        <NavDropdown.Item>
+                                            Orders
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            )}
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     {!userInfo.isVerified &&
@@ -52,26 +72,7 @@ const Header = () => {
                                     <NavDropdown.Item onClick={logoutHandler}>
                                         Logout
                                     </NavDropdown.Item>
-                                    {/* ADMIN MENU:  */}
-                                    {userInfo && userInfo.isAdmin && (
-                                        <NavDropdown title='ADMIN' id='username'>
-                                            <LinkContainer to='/admin/users/list'>
-                                                <NavDropdown.Item>
-                                                    Users List
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
-                                            <LinkContainer to='/admin/products/list'>
-                                                <NavDropdown.Item>
-                                                    Products
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
-                                            <LinkContainer to='/admin/orders/list'>
-                                                <NavDropdown.Item>
-                                                    Orders
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
-                                        </NavDropdown>
-                                    )}
+
                                 </NavDropdown>
 
                             ) : (

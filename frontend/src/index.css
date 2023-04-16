@@ -98,6 +98,9 @@
   .blue{
     color:blue;
   }
+  .green{
+    color:green;
+  }
   
   @media (hover: hover) {
   .highlight:hover {

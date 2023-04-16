@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usersList } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Button, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
@@ -63,7 +62,7 @@ const UsersListScreen = () => {
                                     <td >{user.name}</td>
                                     <td >{user.lastname}</td>
                                     <td ><a href={`mailto: ${user.email}`}>{user.email}</a></td>
-                                    <td className='text-centered'>{user.isAdmin ? <i className='fas fa-check red' /> : <i className='fas fa-times green' />}</td>
+                                    <td className='text-centered'>{user.isAdmin ? <i className='fas fa-check green' /> : <i className='fas fa-times red' />}</td>
                                     <td >{user.createdAt.substring(0, 10)}</td>
                                     <td>
                                         <LinkContainer to={`/user/${user._id}/edit`}>
