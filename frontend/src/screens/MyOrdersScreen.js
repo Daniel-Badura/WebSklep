@@ -37,9 +37,9 @@ const MyOrdersScreen = () => {
                         : errorMyOrders
                             ? <Message variant='danger'>{errorMyOrders}</Message>
                             : (
-                                <Table className='table-md' striped hover bordered responsive >
-                                    <thead>
-                                        <tr>
+                                <Table className='table-md text-centered' striped hover bordered responsive >
+                                    <thead >
+                                        <tr >
                                             <th>ID</th>
                                             <th>Date</th>
                                             <th>Total</th>
@@ -53,16 +53,16 @@ const MyOrdersScreen = () => {
                                                 <td>
                                                     <a href={`/order/${order._id}`}>{order.orderNumber} </a>
                                                 </td>
-                                                <td>{order.createdAt.substring(0, 10)}</td>
+                                                <td >{order.createdAt.substring(0, 10)}</td>
                                                 <td>{order.totalPrice}</td>
-                                                <td>
+                                                <td >
                                                     {
                                                         order.isPaid
                                                             ? order.paymentDate.substring(0, 10)
                                                             : (<i className='fas fa-times red' />)
                                                     }
                                                 </td>
-                                                <td>
+                                                <td >
                                                     {
                                                         order.isDelivered
                                                             ? order.delivereyDate.substring(0, 10)

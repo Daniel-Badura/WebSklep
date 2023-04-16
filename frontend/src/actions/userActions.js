@@ -1,3 +1,4 @@
+import { MY_ORDERS_RESET } from "../constants/orderConstatns";
 import {
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
@@ -15,6 +16,7 @@ import {
     USER_VERIFY_EMAIL_REQUEST,
     USER_VERIFY_EMAIL_SUCCESS,
     USER_VERIFY_EMAIL_FAIL,
+    USER_DETAILS_RESET,
 } from "../constants/userConstants";
 import axios from 'axios';
 
@@ -50,9 +52,10 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     localStorage.clear();
-    dispatch({
-        type: USER_LOGOUT
-    });
+    dispatch({ type: USER_LOGOUT });
+    dispatch({ type: USER_DETAILS_RESET });
+    dispatch({ type: MY_ORDERS_RESET });
+
 };
 
 

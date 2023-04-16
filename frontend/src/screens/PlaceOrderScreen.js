@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import Message from '../components/Message';
 import { createOrder } from '../actions/orderActions';
+import { CART_RESET } from '../constants/cartConstants';
 
 const PlaceOrderScreen = () => {
     const navigate = useNavigate();
@@ -23,9 +24,10 @@ const PlaceOrderScreen = () => {
 
     useEffect(() => {
         if (orderCreateSuccess) {
+            dispatch({ type: CART_RESET });
             navigate(`/order/${order._id}`);
         }
-    }, [navigate, orderCreateSuccess, order]);
+    }, [navigate, orderCreateSuccess, order, dispatch]);
     const placeOrderHandler = () => {
         dispatch(
             createOrder({
@@ -37,6 +39,7 @@ const PlaceOrderScreen = () => {
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
             }));
+
         // navigate(`/order/${order._id}`);
     };
 
