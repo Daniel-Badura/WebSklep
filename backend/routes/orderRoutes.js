@@ -10,7 +10,7 @@ import { authenticator } from "../middleware/authMiddleware.js";
 router.route('/').post(authenticator, addOrderItems);
 router.route('/myorders').get(authenticator, getMyOrders);
 router.route('/:id').get(authenticator, getOrderById);
-router.route('/:id/pay').get(authenticator, updateOrderPaid);
+router.route('/:id/pay').put(authenticator, updateOrderPaid);
 
 
 export default router;

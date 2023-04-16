@@ -1,9 +1,15 @@
 import mongoose from 'mongoose';
+import { transporter } from '../config/nodemailer.js';
+import { setMailOptions } from '../data/mailOptions.js';
+import dotenv from 'dotenv';
+import User from './userModel.js';
+
+dotenv.config();
 
 const orderSchema = mongoose.Schema({
     orderNumber: {
         type: String,
-        unique: true,
+        // unique: true,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -80,22 +86,47 @@ const orderSchema = mongoose.Schema({
         timestamps: true
     }
 );
-
-orderSchema.pre('save', function (next) {
+orderSchema.pre('save', async function (next) {
     const order = this;
+    const user = await User.findById(order.user);
     if (!order.orderNumber) {
-        mongoose.model('Order').countDocuments().then(count => {
-            order.orderNumber = ("BADUR" + String(count + 1).padStart(6, '0'));
-            console.log(`created order ${order.orderNumber}`.green);
-            next();
-        }).catch(err => {
+        try {
+            const count = await mongoose.model('Order').countDocuments();
+            const orderNumber = ("BADUR" + String(count + 1).padStart(6, '0'));
+            order.orderNumber = orderNumber;
+            console.log(`created order ${orderNumber}`.green);
+            const mailOptions = {
+                from: process.env.SMTP_USER,
+                to: user.email,
+                name: user.name,
+                lastname: user.lastname,
+                orderNumber: order.orderNumber,
+                orderDate: order.createdAt,
+                orderItems: order.orderItems,
+                totalPrice: order.totalPrice,
+            };
+
+            const mail = setMailOptions(mailOptions);
+            transporter.sendMail(mail, (error, info) => {
+                if (error) {
+                    console.error(error);
+                    next(error);
+                } else {
+                    console.log(('Email sent:', info.response).green);
+                    next();
+                }
+            });
+        } catch (err) {
             next(err);
-        });
+        }
     } else {
         next();
     }
 });
 
 const Order = mongoose.model('Order', orderSchema);
+
+
+
 
 export default Order;
