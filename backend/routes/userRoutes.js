@@ -1,7 +1,7 @@
 import express from "express";
 
 const router = express.Router();
-import { authUser, getEmailVerification, getUserProfile, getUsers, registerUser, updateUserProfile } from "../controllers/userController.js";
+import { authUser, putEmailVerification, getUserProfile, getUsers, registerUser, updateUserProfile, deleteUser } from "../controllers/userController.js";
 import { authenticator, isAdmin } from "../middleware/authMiddleware.js";
 
 
@@ -17,6 +17,6 @@ router
     .put(authenticator, updateUserProfile);
 router
     .route('/profile/verify')
-    .put(authenticator, getEmailVerification);
-
+    .put(authenticator, putEmailVerification);
+router.route('/:id').delete(authenticator, isAdmin, deleteUser);
 export default router;

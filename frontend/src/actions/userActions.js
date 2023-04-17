@@ -23,6 +23,7 @@ import {
     USER_DELETE_REQUEST,
     USER_DELETE_SUCCESS,
     USER_DELETE_FAIL,
+    USER_LIST_RESET,
 } from "../constants/userConstants";
 import axios from 'axios';
 
@@ -61,6 +62,7 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: USER_LOGOUT });
     dispatch({ type: USER_DETAILS_RESET });
     dispatch({ type: MY_ORDERS_RESET });
+    dispatch({ type: USER_LIST_RESET });
 
 };
 

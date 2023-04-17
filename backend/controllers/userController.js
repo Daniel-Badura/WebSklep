@@ -124,7 +124,11 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
     }
 });
 
-export const getEmailVerification = asyncHandler(async (req, res) => {
+
+// @desc        get email verification
+// @route       PUT /api/users/profile/verify'
+// @access      Private
+export const putEmailVerification = asyncHandler(async (req, res) => {
     const verificationCode = req.body.verificationCode;
     const user = await User.findById(req.user._id);
 
@@ -152,7 +156,25 @@ export const getEmailVerification = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc        get users list
+// @route       GET /api/users/list'
+// @access      Private
 export const getUsers = asyncHandler(async (req, res) => {
     const users = await User.find({});
     res.json(users);
+});
+
+// @desc        delete users list
+// @route       DELETE /api/users/list'
+// @access      Private
+export const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (user) {
+        await user.remove();
+        res.json({ message: 'User removed' });
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
 });
