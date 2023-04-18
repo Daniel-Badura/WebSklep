@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -63,7 +63,7 @@ const ProfileScreen = () => {
         }
     };
     return (
-        <Row><Col md={6}>
+        <Col md={6}>
             <h2>
                 Update Profile
             </h2>
@@ -97,14 +97,18 @@ const ProfileScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='email' className='pt-2'>
-                    <Form.Label>
-                        <Form.Check
-                            type='checkbox'
-                            label='Email Address '
-                            checked={changeEmail}
-                            onChange={(e) => setChangeEmail(e.target.checked)}
+                    <Form.Label>Email Address{' '}
+                        {
+                            userInfo.isVerified &&
 
-                        ></Form.Check></Form.Label>
+                            <Form.Check className='block'
+                                type='checkbox'
+                                checked={changeEmail}
+                                onChange={(e) => setChangeEmail(e.target.checked)}
+                            ></Form.Check>
+
+                        }
+                    </Form.Label>
                     <Form.Control
                         type='email'
                         placeholder='Email Address'
@@ -125,8 +129,6 @@ const ProfileScreen = () => {
                     ></Form.Control>
                 </Form.Group>
 
-
-
                 <Form.Group controlId='password' className='pt-2'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -136,6 +138,7 @@ const ProfileScreen = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
+
                 <Form.Group controlId='changePassword' className='pt-2'>
                     <Form.Check
                         type='checkbox'
@@ -170,10 +173,6 @@ const ProfileScreen = () => {
                 </Button>
             </Form>
         </Col>
-            {/* <Col md={9}>
-                <h2> My Orders </h2>
-            </Col> */}
-        </Row >
     );
 };
 

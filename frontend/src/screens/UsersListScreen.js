@@ -16,8 +16,8 @@ const UsersListScreen = () => {
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
 
-    // const userDelete = useSelector((state) => state.userDelete);
-    // const { success: successDelete } = userDelete;
+    const userDelete = useSelector((state) => state.userDelete);
+    const { success: deleted } = userDelete;
 
     const usersList = useSelector(state => state.usersList);
     const { loading, error, users } = usersList;
@@ -30,7 +30,7 @@ const UsersListScreen = () => {
             dispatch(logout());
             navigate('/login');
         }
-    }, [dispatch, userInfo, navigate]);
+    }, [dispatch, userInfo, navigate, deleted]);
 
     const deleteHandler = (id, email) => {
         if (window.confirm(`Confirm removing ${email}`)) {
