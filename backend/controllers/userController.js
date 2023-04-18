@@ -94,7 +94,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 // @desc        Update user profile
 // @route       PUT /api/users/profile
 // @access      Private
-export const updateUserProfile = asyncHandler(async (req, res) => {
+export const updateMyProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
         if (await user.checkPassword(req.body.password)) {
@@ -175,6 +175,47 @@ export const deleteUser = asyncHandler(async (req, res) => {
         res.json({ message: 'User removed' });
     } else {
         // res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+// @desc        get user by id
+// @route       GET /api/users/:id'
+// @access      Private
+export const getUserById = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id).select('-password');
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+// @desc        Update user profile
+// @route       PUT /api/users/profile
+// @access      Private
+export const updateUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+        console.log("Password Confirmed".green);
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.lastname = req.body.lastname || user.lastname;
+        user.phone = req.body.phone || user.phone;
+        user.isAdmin = req.body.isAdmin;
+
+        const userUpdated = await user.save();
+        res.json({
+            _id: userUpdated._id,
+            name: userUpdated.name,
+            lastname: userUpdated.lastname,
+            email: userUpdated.email,
+            phone: userUpdated.phone,
+        });
+
+    } else {
+        res.status(404);
         throw new Error('User not found');
     }
 });
