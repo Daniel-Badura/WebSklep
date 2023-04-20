@@ -65,7 +65,7 @@ const UsersListScreen = () => {
                                     <td className='text-centered'>{user.isAdmin ? <i className='fas fa-check green' /> : <i className='fas fa-times red' />}</td>
                                     <td >{user.createdAt.substring(0, 10)}</td>
                                     <td>
-                                        <LinkContainer to={`/user/${user._id}/edit`}>
+                                        <LinkContainer to={`/admin/users/${user._id}/edit`}>
                                             <Button variant='primary' className='btn-sm'>
                                                 <i className='fas fa-edit' />
                                             </Button>

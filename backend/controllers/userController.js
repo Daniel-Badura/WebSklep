@@ -196,11 +196,11 @@ export const getUserById = asyncHandler(async (req, res) => {
 // @route       PUT /api/users/profile
 // @access      Private
 export const updateUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.body._id);
     if (user) {
         console.log("Password Confirmed".green);
         user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
+        if (user.email !== req.body.email) { user.email = req.body.email; }
         user.lastname = req.body.lastname || user.lastname;
         user.phone = req.body.phone || user.phone;
         user.isAdmin = req.body.isAdmin;
