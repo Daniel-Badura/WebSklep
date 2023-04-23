@@ -42,16 +42,16 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 // @route       POST /api/products/
 // @access      Private
 export const createProduct = asyncHandler(async (req, res) => {
-    const { name, price, description, image, brand, category, countInStock } = req.body;
+    // const { name, price, description, image, brand, category, countInStock } = req.body;
     const product = new Product({
-        name: name,
-        price: price,
-        image: image,
+        name: 'New Item',
+        price: 0,
+        image: 'image',
         user: req.user._id,
-        category: category,
-        brand: brand,
-        countInStock: countInStock,
-        description: description,
+        category: 'category',
+        brand: 'brand',
+        countInStock: 0,
+        description: 'description',
     });
     const createdProduct = await product.save();
     res.status(201).json(createdProduct);

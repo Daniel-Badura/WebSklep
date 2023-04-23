@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 // import { getProductDetails, updateProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstats';
-import { listProductDetails } from '../actions/productActions';
+import { listProductDetails, updateProduct } from '../actions/productActions';
 
 
 
@@ -45,7 +45,7 @@ const EditProductScreen = () => {
                 setName(product.name);
                 setPrice(product.price);
                 setImage(product.image);
-                setBrand(product.category);
+                setBrand(product.brand);
                 setDescription(product.description);
                 setCategory(product.category);
                 setCountInStock(product.category);
@@ -55,7 +55,16 @@ const EditProductScreen = () => {
     }, [dispatch, product, productId, navigate, successUpdate]);
     const submitHandler = (e) => {
         e.preventDefault();
-        // Update product
+        dispatch(updateProduct({
+            _id: productId,
+            name,
+            price,
+            image,
+            brand,
+            description,
+            category,
+            countInStock
+        }));
     };
     return (
         <>

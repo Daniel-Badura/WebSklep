@@ -19,28 +19,24 @@ const ProductListScreen = () => {
     const { userInfo } = userLogin;
 
     const productDelete = useSelector((state) => state.productDelete);
-    const { success: deleted, error: deleteError, loading: deleteLoading, product: createdProduct } = productDelete;
+    const { success: deleted, error: deleteError, loading: deleteLoading, } = productDelete;
 
     const productCreate = useSelector((state) => state.productCreate);
-    const { success: created, error: createError, loading: createLoading } = productDelete;
+    const { success: created, error: createError, loading: createLoading, product: createdProduct } = productCreate;
 
     const productList = useSelector(state => state.productList);
     const { loading, error, products } = productList;
 
     useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET });
-        if (userInfo && userInfo.isAdmin) {
-            dispatch(listProducts());
-        } else {
-            dispatch(logout());
-            navigate('/login');
-        }
-        if (!userInfo.isAdmin) {
+        if (!userInfo && !userInfo.isAdmin) {
             dispatch(logout());
             navigate('/login');
         }
         if (created) {
             navigate(`/admin/products/${createdProduct._id}/edit`);
+        } else {
+            dispatch(listProducts());
         }
     }, [dispatch, userInfo, navigate, deleted, created, createdProduct]);
 
