@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-// import { getProductDetails, updateProduct } from '../actions/userActions';
+// import { getProductDetails, updateProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstats';
+import { listProductDetails } from '../actions/productActions';
 
 
 
@@ -15,119 +16,135 @@ const EditProductScreen = () => {
     const dispatch = useDispatch();
     const { id: productId } = useParams();
     const [name, setName] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [price, setPrice] = useState(0);
+    const [image, setImage] = useState('');
+    const [brand, setBrand] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [countInStock, setCountInStock] = useState('');
+
+
+
     const [message, setMessage] = useState(null);
-    const [isVerified, setIsVerified] = useState(false);
 
-    const userDetails = useSelector(state => state.userDetails);
-    const { loading, error, user } = userDetails;
 
-    const userUpdate = useSelector((state) => state.userUpdate);
-    const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate;
+    const productDetails = useSelector(state => state.productDetails);
+    const { loading, error, product } = productDetails;
+
+    const productUpdate = useSelector((state) => state.productUpdate);
+    const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate;
 
     useEffect(() => {
         if (successUpdate) {
             dispatch({ type: PRODUCT_UPDATE_RESET });
-            navigate('/admin/users/list');
+            navigate('/admin/products/list');
         } else {
-            if (!user || user._id !== productId) {
-                // dispatch(getProductDetails(productId));
+            if (!product.name || product._id !== productId) {
+                dispatch(listProductDetails(productId));
             } else {
-                setName(user.name);
-                setLastname(user.lastname);
-                setEmail(user.email);
-                setPhone(user.phone);
-                setIsAdmin(user.isAdmin);
-                setIsVerified(user.isVerified);
+                setName(product.name);
+                setPrice(product.price);
+                setImage(product.image);
+                setBrand(product.category);
+                setDescription(product.description);
+                setCategory(product.category);
+                setCountInStock(product.category);
             }
         }
         setMessage(null);
-    }, [dispatch, user, productId, navigate, successUpdate]);
+    }, [dispatch, product, productId, navigate, successUpdate]);
     const submitHandler = (e) => {
         e.preventDefault();
-        // dispatch(updateProduct({ _id: productId, name, lastname, email, phone, isAdmin }));
+        // Update product
     };
-    return (<>
-        <Link to='/admin/users/list' className='btn btn-light my-3' >
-            Return
-        </Link>
-        <FormContainer>
-            <h1>
-                Edit Product
-            </h1>
-            {message && <Message variant='danger'> {message} </Message>}
-            {loadingUpdate && <Loader />}
-            {errorUpdate && <Message variant='danger'> {errorUpdate} </Message>}
-            { }
-            {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
-            {loading ? <Loader /> :
-                <Form onSubmit={submitHandler}>
-                    <Form.Group controlId='name' className='pt-2'>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Name'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        ></Form.Control>
-                    </Form.Group>
+    return (
+        <>
+            <Link to='/admin/products/list' className='btn btn-light my-3' >
+                Return
+            </Link>
+            <FormContainer>
+                <h1>
+                    Edit Product
+                </h1>
+                {message && <Message variant='danger'> {message} </Message>}
+                {loadingUpdate && <Loader />}
+                {errorUpdate && <Message variant='danger'> {errorUpdate} </Message>}
+                { }
+                {error && error.split(',').map(errorMessage => <Message key={errorMessage} variant='danger'> {errorMessage.trim().replace('Path ', '')} </Message>)}
+                {loading ? <Loader /> :
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='name' className='pt-2'>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group controlId='lastname' className='pt-2'>
-                        <Form.Label>Lastname</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Lastname'
-                            value={lastname}
-                            onChange={(e) => setLastname(e.target.value)}
-                        ></Form.Control>
-                    </Form.Group>
+                        <Form.Group controlId='price' className='pt-2'>
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type='number'
+                                placeholder='Price'
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='category' className='pt-2'>
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Category'
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='description' className='pt-2'>
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Description'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='brand' className='pt-2'>
+                            <Form.Label>Brand</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Brand'
+                                value={brand}
+                                onChange={(e) => setBrand(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='image' className='pt-2'>
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control
+                                type='string'
+                                placeholder='Image url'
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='countInStock' className='pt-2'>
+                            <Form.Label>CountInStock</Form.Label>
+                            <Form.Control
+                                type='number'
+                                placeholder='CountInStock'
+                                value={countInStock}
+                                onChange={(e) => setCountInStock(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Button type='submit' variant='primary' className='text-center my-2'>
+                            Update
+                        </Button>
+                    </Form>
+                }
 
-                    <Form.Group controlId='email' className='pt-2'>
-                        <Form.Label>Email Address</Form.Label>
-                        <Form.Control
-                            type='email'
-                            placeholder='Email Address'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        ></Form.Control>
-                    </Form.Group>
-
-                    <Form.Group controlId='phone' className='pt-2'>
-                        <Form.Label>Phone Number</Form.Label>
-                        <Form.Control
-                            type='tel'
-                            placeholder='Phone #'
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                        ></Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId='isAdmin' className='pt-2'>
-                        <Form.Check
-                            type='checkbox'
-                            label='is Admin'
-                            checked={isAdmin}
-                            onChange={(e) => setIsAdmin(e.target.checked)}
-                        ></Form.Check>
-                    </Form.Group>
-                    <Form.Group controlId='isVerified' className='pt-2'>
-                        <Form.Check
-                            type='checkbox'
-                            label='is Verified'
-                            checked={isVerified}
-                            onChange={(e) => setIsVerified(e.target.checked)}
-                        ></Form.Check>
-                    </Form.Group>
-                    <Button type='submit' variant='primary' className='text-center my-2'>
-                        Update
-                    </Button>
-                </Form>
-            }
-
-        </FormContainer >
-    </>
+            </FormContainer >
+        </>
     );
 };
 

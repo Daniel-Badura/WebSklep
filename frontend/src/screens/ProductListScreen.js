@@ -5,8 +5,9 @@ import { Button, Col, Row, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { logout } from '../actions/userActions';
-import { deleteProduct, listProducts } from '../actions/productActions';
+import { createProduct, deleteProduct, listProducts } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
+import { PRODUCT_CREATE_RESET } from '../constants/productConstats';
 
 const ProductListScreen = () => {
 
@@ -18,20 +19,30 @@ const ProductListScreen = () => {
     const { userInfo } = userLogin;
 
     const productDelete = useSelector((state) => state.productDelete);
-    const { success: deleted, error: deleteError, loading: deleteLoading } = productDelete;
+    const { success: deleted, error: deleteError, loading: deleteLoading, product: createdProduct } = productDelete;
+
+    const productCreate = useSelector((state) => state.productCreate);
+    const { success: created, error: createError, loading: createLoading } = productDelete;
 
     const productList = useSelector(state => state.productList);
     const { loading, error, products } = productList;
 
     useEffect(() => {
-
+        dispatch({ type: PRODUCT_CREATE_RESET });
         if (userInfo && userInfo.isAdmin) {
             dispatch(listProducts());
         } else {
             dispatch(logout());
             navigate('/login');
         }
-    }, [dispatch, userInfo, navigate, deleted]);
+        if (!userInfo.isAdmin) {
+            dispatch(logout());
+            navigate('/login');
+        }
+        if (created) {
+            navigate(`/admin/products/${createdProduct._id}/edit`);
+        }
+    }, [dispatch, userInfo, navigate, deleted, created, createdProduct]);
 
     const deleteHandler = (id, name) => {
         if (window.confirm(`Confirm removing ${name}`)) {
@@ -39,7 +50,7 @@ const ProductListScreen = () => {
         }
     };
     const createProductHandler = () => {
-        //CREATE PRODUCT
+        dispatch(createProduct());
     };
 
 
@@ -50,15 +61,17 @@ const ProductListScreen = () => {
                 <Col>
                     <h1>Products</h1>
                 </Col>
-                <Col className='text-right'>
-                    <Button className='my-3 rounded' onClick={createProductHandler}>
+                <Col className='text-center'>
+                    <Button className='my-3 rounded ' onClick={createProductHandler}>
                         <i className='fas fa-plus'> </i> Create Product
                     </Button>
                 </Col>
             </Row>
-
+            {/* {deleted && <Message variant='success'>Successfully removed item</Message>} */}
             {deleteLoading && <Loader />}
-            {deleteError && <Message variant='danger'>{error}</Message>}
+            {deleteError && <Message variant='danger'>{deleteError}</Message>}
+            {createLoading && <Loader />}
+            {createError && <Message variant='danger'>{createError}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
                 (
                     <Table striped bordered hover responsive className='table-sm ' >
@@ -75,7 +88,7 @@ const ProductListScreen = () => {
                             {products ? products.map(product => (
                                 <tr key={product._id}>
                                     {/* <td> <a href={`/products/${product._id}`}>{product._id} </a></td> */}
-                                    <td >{product.name}</td>
+                                    <td> <a href={`/products/${product._id}`}>{product.name} </a></td>
                                     <td >{product.price}€</td>
                                     <td >{product.category}</td>
                                     <td >{product.brand}</td>

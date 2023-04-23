@@ -22,7 +22,7 @@ const Product = ({ product }) => {
                     <Card.Img className='rounded' src={product.image} variant='top' />
                 </Link>
                 <Card.Body>
-                    <Link className='link' to={`/product/${product._id}`}>
+                    <Link className='link' to={`/products/${product._id}`}>
                         <Card.Title className='text-center card-title enlarge' as='div'>
                             <strong className='fw-bold'>{product.name}</strong>
                         </Card.Title>
