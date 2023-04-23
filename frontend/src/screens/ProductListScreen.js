@@ -18,7 +18,7 @@ const ProductListScreen = () => {
     const { userInfo } = userLogin;
 
     const productDelete = useSelector((state) => state.productDelete);
-    const { success: deleted } = productDelete;
+    const { success: deleted, error: deleteError, loading: deleteLoading } = productDelete;
 
     const productList = useSelector(state => state.productList);
     const { loading, error, products } = productList;
@@ -33,8 +33,8 @@ const ProductListScreen = () => {
         }
     }, [dispatch, userInfo, navigate, deleted]);
 
-    const deleteHandler = (id, email) => {
-        if (window.confirm(`Confirm removing ${email}`)) {
+    const deleteHandler = (id, name) => {
+        if (window.confirm(`Confirm removing ${name}`)) {
             dispatch(deleteProduct(id));
         }
     };
@@ -57,6 +57,8 @@ const ProductListScreen = () => {
                 </Col>
             </Row>
 
+            {deleteLoading && <Loader />}
+            {deleteError && <Message variant='danger'>{error}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
                 (
                     <Table striped bordered hover responsive className='table-sm ' >
@@ -83,7 +85,7 @@ const ProductListScreen = () => {
                                                 <i className='fas fa-edit' />
                                             </Button>
                                         </LinkContainer>
-                                        <Button variant='danger' className='btn-sm' onClick={() => { deleteHandler(product._id, product.email); }} >
+                                        <Button variant='danger' className='btn-sm' onClick={() => { deleteHandler(product._id, product.name); }} >
                                             <i className='fas fa-trash' />
                                         </Button>
                                     </td>
