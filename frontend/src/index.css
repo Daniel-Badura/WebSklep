@@ -83,6 +83,10 @@
   .enlarge {
   transition-duration: 1s;
   }
+
+  .big{
+    transform: scale(2);
+  }
   
   .move-right:hover {
   padding-left: 3rem;

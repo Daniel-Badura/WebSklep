@@ -78,6 +78,7 @@ const ProductListScreen = () => {
                                 <th>Price</th>
                                 <th>Category</th>
                                 <th>Brand</th>
+                                <th>Edit/Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,12 +91,12 @@ const ProductListScreen = () => {
                                     <td >{product.brand}</td>
                                     <td>
                                         <LinkContainer to={`/admin/products/${product._id}/edit`}>
-                                            <Button variant='primary' className='btn-sm'>
-                                                <i className='fas fa-edit' />
+                                            <Button variant='primary' className='btn-sm rounded'>
+                                                <i className='fas fa-edit big ' />
                                             </Button>
                                         </LinkContainer>
-                                        <Button variant='danger' className='btn-sm' onClick={() => { deleteHandler(product._id, product.name); }} >
-                                            <i className='fas fa-trash' />
+                                        <Button variant='danger' className='btn-sm rounded' onClick={() => { deleteHandler(product._id, product.name); }} >
+                                            <i className='fas fa-trash big' />
                                         </Button>
                                     </td>
                                 </tr>
