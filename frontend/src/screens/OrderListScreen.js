@@ -23,8 +23,7 @@ const OrderListScreen = () => {
         if (!userInfo) {
             navigate('/login');
         }
-        console.log(orders);
-    }, [userInfo, dispatch, navigate, orders]);
+    }, [userInfo, dispatch, navigate,]);
 
     return (
         <>

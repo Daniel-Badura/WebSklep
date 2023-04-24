@@ -6,6 +6,8 @@ import Checkout from '../components/Checkout';
 import Message from '../components/Message';
 import { createOrder } from '../actions/orderActions';
 import { CART_RESET } from '../constants/cartConstants';
+import { USER_DETAILS_RESET } from '../constants/userConstants';
+import { ORDER_CREATE_RESET, } from '../constants/orderConstatns';
 
 const PlaceOrderScreen = () => {
     const navigate = useNavigate();
@@ -14,6 +16,13 @@ const PlaceOrderScreen = () => {
         return (Math.round(number * 100) / 100).toFixed(2);
     };
     const cart = useSelector(state => state.cart);
+
+    if (!cart.shippingAddress.address) {
+        navigate('/shipping');
+    } else if (!cart.paymentMethod) {
+        navigate('/payment');
+    }
+
     cart.itemsPrice = Number(cart.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2);
     cart.shippingPrice = decimalize(cart.itemsPrice > 100 ? 0 : 100);
     cart.taxPrice = decimalize(Number((0.23 * cart.itemsPrice).toFixed(2)));
@@ -22,12 +31,18 @@ const PlaceOrderScreen = () => {
     const orderCreate = useSelector(state => state.orderCreate);
     const { order, success: orderCreateSuccess, error } = orderCreate;
 
+
+
+
     useEffect(() => {
         if (orderCreateSuccess) {
-            dispatch({ type: CART_RESET });
             navigate(`/order/${order._id}`);
+            dispatch({ type: USER_DETAILS_RESET });
+            dispatch({ type: ORDER_CREATE_RESET });
+            dispatch({ type: CART_RESET });
         }
-    }, [navigate, orderCreateSuccess, order, dispatch]);
+        // eslint-disable-next-line
+    }, [orderCreateSuccess]);
     const placeOrderHandler = () => {
         dispatch(
             createOrder({
@@ -39,8 +54,6 @@ const PlaceOrderScreen = () => {
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
             }));
-
-        // navigate(`/order/${order._id}`);
     };
 
     return (

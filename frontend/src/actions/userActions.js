@@ -1,4 +1,4 @@
-import { MY_ORDERS_RESET } from "../constants/orderConstatns";
+import { MY_ORDERS_RESET, ORDER_CREATE_RESET, ORDER_DETAILS_RESET } from "../constants/orderConstatns";
 import {
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
@@ -61,12 +61,14 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-    localStorage.clear();
     dispatch({ type: USER_LOGOUT });
     dispatch({ type: USER_DETAILS_RESET });
     dispatch({ type: MY_ORDERS_RESET });
     dispatch({ type: USER_LIST_RESET });
+    dispatch({ type: ORDER_CREATE_RESET });
+    dispatch({ type: ORDER_DETAILS_RESET });
 
+    localStorage.clear();
 };
 
 

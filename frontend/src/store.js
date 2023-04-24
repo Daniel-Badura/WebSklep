@@ -9,7 +9,7 @@ import {
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducer';
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userVerifyEmailReducer, usersListReducer, userDeleteReducer, userUpdateReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDetailsReducer, orderListReducer, orderMyOrdersReducer, orderPayReducer } from './reducers/orderReducers';
+import { orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMyOrdersReducer, orderPayReducer } from './reducers/orderReducers';
 
 
 const middleware = [thunk];
@@ -33,6 +33,7 @@ const reducer = combineReducers({
     orderPay: orderPayReducer,
     orderMyOrders: orderMyOrdersReducer,
     orderList: orderListReducer,
+    orderDeliver: orderDeliverReducer,
 
 });
 // localStorage.removeItem('userInfo'); web;
