@@ -59,7 +59,7 @@
   box-shadow: 0 1rem 1rem rgba(253, 94, 1, 0.3);
   }
   
-  .button {
+  button {
   border-radius: 1rem;
   }
   
@@ -137,4 +137,7 @@
   }
  .block {
   display: inline-block;
+ }
+ .text-right{
+  text-align: right;
  }

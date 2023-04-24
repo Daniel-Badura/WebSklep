@@ -23,6 +23,7 @@ import EditUserScreen from './screens/EditUserScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import EditProductScreen from './screens/EditProductScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import UserAccountSettingsScreen from './screens/UserAccountSettingsScreen';
 
 
 
@@ -47,6 +48,7 @@ function App() {
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/profile/orders' element={<MyOrdersScreen />} />
             <Route path='/profile/verify' element={<VerificationScreen />} />
+            <Route path='/profile/settings' element={<UserAccountSettingsScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />

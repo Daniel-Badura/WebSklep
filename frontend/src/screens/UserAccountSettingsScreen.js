@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -12,7 +12,7 @@ import FormContainer from '../components/FormContainer';
 
 
 
-const ProfileScreen = () => {
+const UserAccountSettingsScreen = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -22,7 +22,10 @@ const ProfileScreen = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState(null);
+    const [newPassword, setNewPassword] = useState('');
+    const [changePassword, setChangePassword] = useState(false);
     const [changeEmail, setChangeEmail] = useState(false);
 
 
@@ -54,12 +57,16 @@ const ProfileScreen = () => {
     const submitHandler = (e) => {
         setMessage(null);
         e.preventDefault();
-        dispatch(updateUserDetails({ id: user._id, name, lastname, email, phone, password }));
+        if (newPassword !== confirmNewPassword) {
+            setMessage('Passwords do not match');
+        } else {
+            dispatch(updateUserDetails({ id: user._id, name, lastname, email, phone, password, newPassword }));
+        }
     };
     return (
         <FormContainer>
             <h2>
-                Update Profile
+                Account Settings
             </h2>
             {message && <Message variant='danger'> {message} </Message>}
             {success && <Message variant='success'>Profile successfully updated </Message>}
@@ -70,26 +77,6 @@ const ProfileScreen = () => {
             {loading && <Loader />}
 
             <Form onSubmit={submitHandler}>
-                <Form.Group controlId='name' className='pt-2'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId='lastname' className='pt-2'>
-                    <Form.Label>Lastname</Form.Label>
-                    <Form.Control
-                        type='text'
-                        placeholder='Lastname'
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
-
                 <Form.Group controlId='email' className='pt-2'>
                     <Form.Label>Email Address{' '}
                         {
@@ -113,16 +100,6 @@ const ProfileScreen = () => {
                     ></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId='phone' className='pt-2'>
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                        type='tel'
-                        placeholder='Phone #'
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
-
                 <Form.Group controlId='password' className='pt-2'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -132,12 +109,50 @@ const ProfileScreen = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
-                <Button type='submit' variant='success' className='text-center my-2'>
-                    Update
-                </Button>
+
+                <Form.Group controlId='changePassword' className='pt-2'>
+                    <Form.Check
+                        type='checkbox'
+                        label='Change Password'
+                        checked={changePassword}
+                        onChange={(e) => setChangePassword(e.target.checked)}
+                    ></Form.Check>
+                </Form.Group>
+                {changePassword && (<div>
+                    <Form.Group controlId='confirmPassword' className='pt-2'>
+                        <Form.Label> New Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                        ></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId='confirmNewPassword' className='pt-2'>
+                        <Form.Label>Confirm New Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={confirmNewPassword}
+                            onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        ></Form.Control>
+                    </Form.Group>
+                </div>)}
+                <Row><Col>
+                    <Button type='submit' variant='success' className='text-center my-2'>
+                        Update
+                    </Button>
+                </Col>
+                    <Col className='text-right'>
+                        <Button type='submit' variant='danger' className='my-2'>
+                            Remove Account
+                        </Button>
+                    </Col>
+                </Row>
             </Form>
         </FormContainer>
     );
 };
 
-export default ProfileScreen;
+export default UserAccountSettingsScreen;
