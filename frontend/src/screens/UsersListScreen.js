@@ -66,11 +66,11 @@ const UsersListScreen = () => {
                                     <td >{user.createdAt.substring(0, 10)}</td>
                                     <td>
                                         <LinkContainer to={`/admin/users/${user._id}/edit`}>
-                                            <Button variant='primary' className='btn-sm'>
+                                            <Button variant='warning' className='btn-sm big rounded'>
                                                 <i className='fas fa-edit' />
                                             </Button>
                                         </LinkContainer>
-                                        <Button variant='danger' className='btn-sm' onClick={() => { deleteHandler(user._id, user.email); }} >
+                                        <Button variant='danger' className='btn-sm big' onClick={() => { deleteHandler(user._id, user.email); }} >
                                             <i className='fas fa-trash' />
                                         </Button>
                                     </td>

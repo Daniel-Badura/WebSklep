@@ -101,7 +101,7 @@ const UserAccountSettingsScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='password' className='pt-2'>
-                    <Form.Label>Password</Form.Label>
+                    {changePassword ? <Form.Label>Old Password</Form.Label> : <Form.Label>Password</Form.Label>}
                     <Form.Control
                         type='password'
                         placeholder='Enter password'
