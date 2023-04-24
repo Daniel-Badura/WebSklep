@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Card, Image, ListGroup, Col, Row, Button } from 'react-bootstrap';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { getOrderDetails, payOrder } from '../actions/orderActions';
+import { deliverOrder, getOrderDetails, payOrder } from '../actions/orderActions';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstatns';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -28,39 +28,48 @@ const OrderScreen = () => {
     const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
     useEffect(() => {
-        if (order.user._id !== userInfo._id) {
-            if (!userInfo.isAdmin) {
-                navigate('/profile/orders');
-            }
-        } else {
-            if (!userInfo) {
-                navigate('/login');
-            }
-            // PAYPAL SCRIPT FETCH AND ADD DYNAMICALLY
-            const addPayPalScript = async () => {
-                const { data: clientId } = await axios.get('/api/config/paypal');
-                const script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-                script.async = true;
-                script.onload = () => {
-                    setSdkReady(true);
+        if (order) {
+            if (order.user._id !== userInfo._id) {
+                if (!userInfo.isAdmin) {
+                    navigate('/profile/orders');
+                }
+            } else {
+                if (!userInfo) {
+                    navigate('/login');
+                }
+                // PAYPAL SCRIPT FETCH AND ADD DYNAMICALLY
+                const addPayPalScript = async () => {
+                    const { data: clientId } = await axios.get('/api/config/paypal');
+                    const script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+                    script.async = true;
+                    script.onload = () => {
+                        setSdkReady(true);
+                    };
+                    document.body.appendChild(script);
                 };
-                document.body.appendChild(script);
-            };
-            if (!order || successPay || successDeliver || order._id !== orderId) {
-                dispatch({ type: ORDER_PAY_RESET });
-                dispatch({ type: ORDER_DELIVER_RESET });
-                dispatch(getOrderDetails(orderId));
-            } else if (!order.isPaid) {
-                if (!window.paypal) {
-                    addPayPalScript();
-                } else {
-                    setSdkReady(true);
+                if (!order || successPay || successDeliver || order._id !== orderId) {
+                    dispatch({ type: ORDER_PAY_RESET });
+                    dispatch({ type: ORDER_DELIVER_RESET });
+                    dispatch(getOrderDetails(orderId));
+                } else if (!order.isPaid) {
+                    if (!window.paypal) {
+                        addPayPalScript();
+                    } else {
+                        setSdkReady(true);
+                    }
                 }
             }
+        } else {
+            dispatch(getOrderDetails(orderId));
         }
     }, [dispatch, orderId, successPay, navigate, userInfo, successDeliver, loadingDeliver, order]);
+
+    const deliverHandler = () => {
+        dispatch(deliverOrder(orderId));
+        dispatch(getOrderDetails(orderId));
+    };
 
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder({ orderId, paymentResult }));
@@ -180,13 +189,13 @@ const OrderScreen = () => {
                             {userInfo &&
                                 userInfo.isAdmin &&
                                 order.isPaid &&
-                                // !order.isDelivered && 
+                                !order.isDelivered &&
                                 (
                                     <ListGroup.Item>
                                         <Button
                                             type='button'
                                             className='btn btn-block'
-                                        // onClick={deliverHandler}
+                                            onClick={deliverHandler}
                                         >
                                             Mark As Delivered
                                         </Button>

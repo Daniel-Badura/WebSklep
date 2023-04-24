@@ -2,8 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import { authenticator, isAdmin } from '../middleware/authMiddleware.js';
-import { isatty } from 'tty';
-
+import File from '../models/fileModel.js';
 
 const router = express.Router();
 
@@ -38,8 +37,19 @@ const upload = multer({
     },
 });
 
-router.post('/', authenticator, isAdmin, upload.single('image'), (req, res) => {
-    res.send(`/${req.file.path}`);
+router.post('/', authenticator, isAdmin, upload.single('image'), async (req, res) => {
+    // res.send(`/${req.file.path}`);
+    try {
+        const file = new File({
+            filename: req.file.filename,
+            path: req.file.path,
+        });
+        await file.save();
+        res.status(201).json({ message: 'File uploaded successfully', path: path });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 export default router;
