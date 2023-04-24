@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-// import { getProductDetails, updateProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstats';
 import { listProductDetails, updateProduct } from '../actions/productActions';
+import axios from 'axios';
 
 
 
@@ -22,11 +22,14 @@ const EditProductScreen = () => {
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState('');
+    const [uploading, setUploading] = useState('');
 
 
 
     const [message, setMessage] = useState(null);
 
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
 
     const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product } = productDetails;
@@ -48,7 +51,7 @@ const EditProductScreen = () => {
                 setBrand(product.brand);
                 setDescription(product.description);
                 setCategory(product.category);
-                setCountInStock(product.category);
+                setCountInStock(product.countInStock);
             }
         }
         setMessage(null);
@@ -66,6 +69,29 @@ const EditProductScreen = () => {
             countInStock
         }));
     };
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${userInfo.token}`,
+
+                }
+            };
+            const { data } = await axios.post('/api/upload', formData, config);
+            setImage(data);
+            setUploading(false);
+        } catch (error) {
+            console.error(error);
+            setUploading(false);
+        }
+    };
+
     return (
         <>
             <Link to='/admin/products/list' className='btn btn-light my-3' >
@@ -136,6 +162,13 @@ const EditProductScreen = () => {
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
                             ></Form.Control>
+                            <Form.Control
+                                type='file'
+                                label='Choose File'
+                                onChange={uploadFileHandler}
+                            >
+                            </Form.Control>
+                            {uploading && <Loader />}
                         </Form.Group>
                         <Form.Group controlId='countInStock' className='pt-2'>
                             <Form.Label>CountInStock</Form.Label>

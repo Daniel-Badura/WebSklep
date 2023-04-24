@@ -18,7 +18,7 @@ const Product = ({ product }) => {
     return (
         <>
             <Card className={`rounded highlight my-3 ${hover}`} onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
-                <Link className='link' to={`/product/${product._id}`}>
+                <Link className='link' to={`/products/${product._id}`}>
                     <Card.Img className='rounded' src={product.image} variant='top' />
                 </Link>
                 <Card.Body>

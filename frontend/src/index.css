@@ -85,7 +85,7 @@
   }
 
   .big{
-    transform: scale(2);
+    font-size: 200%;
   }
   
   .move-right:hover {
