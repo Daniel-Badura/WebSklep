@@ -95,7 +95,9 @@ const ProfileScreen = () => {
                         {
                             userInfo.isVerified &&
 
-                            <Form.Check className='block'
+                            <Form.Check
+                                id='checkboxEmail'
+                                className='block'
                                 type='checkbox'
                                 checked={changeEmail}
                                 onChange={(e) => setChangeEmail(e.target.checked)}
@@ -112,7 +114,6 @@ const ProfileScreen = () => {
                         disabled={!changeEmail}
                     ></Form.Control>
                 </Form.Group>
-
                 <Form.Group controlId='phone' className='pt-2'>
                     <Form.Label>Phone Number</Form.Label>
                     <Form.Control

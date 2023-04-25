@@ -65,7 +65,7 @@ const MyOrdersScreen = () => {
                                                 <td >
                                                     {
                                                         order.isDelivered
-                                                            ? order.delivereyDate.substring(0, 10)
+                                                            ? order.deliveryDate.substring(0, 10)
                                                             : (<i className='fas fa-times red' />)
                                                     }
                                                 </td>

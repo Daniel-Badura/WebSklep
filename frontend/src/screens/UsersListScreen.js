@@ -44,7 +44,7 @@ const UsersListScreen = () => {
             <h1>Users</h1>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
                 (
-                    <Table striped bordered hover responsive className='table-sm ' >
+                    <Table striped bordered hover responsive className='table-sm' >
                         <thead >
                             <tr >
                                 <th>ID</th>
@@ -58,7 +58,7 @@ const UsersListScreen = () => {
                         <tbody>
                             {users ? users.map(user => (
                                 <tr key={user._id}>
-                                    <td> <a href={`/users/${user._id}`}>{user._id} </a></td>
+                                    <td> <a href={`/users/${user._id}`}>{user._id}</a></td>
                                     <td >{user.name}</td>
                                     <td >{user.lastname}</td>
                                     <td ><a href={`mailto: ${user.email}`}>{user.email}</a></td>
@@ -66,16 +66,16 @@ const UsersListScreen = () => {
                                     <td >{user.createdAt.substring(0, 10)}</td>
                                     <td>
                                         <LinkContainer to={`/admin/users/${user._id}/edit`}>
-                                            <Button variant='warning' className='btn-sm big rounded'>
+                                            <Button variant='outline-warning' className='btn-sm rounded'>
                                                 <i className='fas fa-edit' />
                                             </Button>
                                         </LinkContainer>
-                                        <Button variant='danger' className='btn-sm big' onClick={() => { deleteHandler(user._id, user.email); }} >
+                                        <Button variant='outline-danger' className='btn-sm ' onClick={() => { deleteHandler(user._id, user.email); }} >
                                             <i className='fas fa-trash' />
                                         </Button>
                                     </td>
                                 </tr>
-                            )) : ''}
+                            )) : <></>}
                         </tbody>
                     </Table>
                 )}

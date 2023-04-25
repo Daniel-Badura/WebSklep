@@ -99,6 +99,8 @@ const OrderScreen = () => {
                                     Address: {' '}
                                 </strong>
 
+                                {order.shippingAddress.companyName},
+                                {order.shippingAddress.vatNumber},
                                 {order.shippingAddress.address},
                                 {order.shippingAddress.city}, {' '}
                                 {order.shippingAddress.postalCode}, {' '}

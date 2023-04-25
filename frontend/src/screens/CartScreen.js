@@ -4,10 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import { getUserDetails } from '../actions/userActions';
-
-
-
 
 const CartScreen = () => {
     const { id } = useParams();
@@ -22,7 +18,6 @@ const CartScreen = () => {
     const { cartItems } = cart ? cart : [];
 
     useEffect(() => {
-        // if (!userInfo) { } else if ((!userInfo.isVerified)) { navigate('/profile/verify'); }
         if (id) {
             dispatch(addToCart(id, quantity));
         }
@@ -33,8 +28,10 @@ const CartScreen = () => {
     });
 
     const checkoutHandler = () => {
+
+
         if (!userInfo) {
-            dispatch(getUserDetails());
+            navigate('/login');
         } else {
             if (!userInfo.isVerified) {
                 navigate('/profile/verify');

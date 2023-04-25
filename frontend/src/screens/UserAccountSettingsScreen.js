@@ -81,16 +81,17 @@ const UserAccountSettingsScreen = () => {
                     <Form.Label>Email Address{' '}
                         {
                             userInfo.isVerified &&
-
-                            <Form.Check className='block'
+                            <Form.Check
+                                id='checkboxEmail'
+                                className='block'
                                 type='checkbox'
                                 checked={changeEmail}
                                 onChange={(e) => setChangeEmail(e.target.checked)}
                             ></Form.Check>
-
                         }
                     </Form.Label>
                     <Form.Control
+
                         type='email'
                         placeholder='Email Address'
                         value={email}

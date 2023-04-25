@@ -196,3 +196,7 @@
   background:black
 }
 @import '~mdb-ui-kit/css/mdb.min.css';
+
+.form-control.is-valid{
+  margin-bottom: 0;
+}
