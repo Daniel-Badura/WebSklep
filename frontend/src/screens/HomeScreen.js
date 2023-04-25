@@ -7,6 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
 
 
 const HomeScreen = () => {
@@ -24,9 +25,7 @@ const HomeScreen = () => {
 
     return (
         <>
-            <h1>
-                Featured Products
-            </h1>
+            {!keyword && <ProductCarousel />}
             {
                 loading
                     ? <Loader />
@@ -50,4 +49,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;;
+export default HomeScreen;

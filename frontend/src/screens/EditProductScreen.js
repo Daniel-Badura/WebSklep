@@ -23,6 +23,7 @@ const EditProductScreen = () => {
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState('');
     const [uploading, setUploading] = useState('');
+    const [featured, setFeatured] = useState('');
 
 
 
@@ -66,7 +67,8 @@ const EditProductScreen = () => {
             brand,
             description,
             category,
-            countInStock
+            countInStock,
+            featured
         }));
     };
 
@@ -178,6 +180,14 @@ const EditProductScreen = () => {
                                 value={countInStock}
                                 onChange={(e) => setCountInStock(e.target.value)}
                             ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='featured' className='pt-2'>
+                            <Form.Check
+                                type='checkbox'
+                                label='Featured'
+                                checked={featured}
+                                onChange={(e) => setFeatured(e.target.checked)}
+                            ></Form.Check>
                         </Form.Group>
                         <Button type='submit' variant='primary' className='text-center my-2'>
                             Update
