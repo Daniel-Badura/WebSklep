@@ -1,9 +1,18 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import LanguageDropdown from './LanguageDropdown';
 
 const Footer = () => {
-    return (
-        <Col className='text-center py-3'>Copyright &copy; WebSklep</Col>
+
+
+
+
+    return (<Row>
+        <Col className='text-right py-3'>
+            Copyright &copy; WebSklep
+        </Col>
+        <Col ><LanguageDropdown className='-animation' />
+        </Col></Row>
     );
 };
 
