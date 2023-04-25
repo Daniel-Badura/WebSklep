@@ -26,8 +26,6 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserAccountSettingsScreen from './screens/UserAccountSettingsScreen';
 
 
-
-
 function App() {
 
 

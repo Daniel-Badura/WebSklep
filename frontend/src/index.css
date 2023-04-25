@@ -169,7 +169,7 @@
   height: 300px;
   padding: 40px;
   margin: 40px;
-  border-radius: 50%;
+  border-radius: 30%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -195,3 +195,4 @@
   color: teal;
   background:black
 }
+@import '~mdb-ui-kit/css/mdb.min.css';

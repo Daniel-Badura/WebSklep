@@ -9,6 +9,7 @@ import { Rating as Stars } from 'react-simple-star-rating';
 import { createProductReview, listProductDetails } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
 import { REVIEW_CREATE_RESET } from '../constants/productConstats';
+import Meta from '../components/Meta';
 
 
 const ProductScreen = () => {
@@ -63,95 +64,97 @@ const ProductScreen = () => {
                 Return
             </Link>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                <><Row>
-                    <Col md={6} >
-                        <Image className='rounded shadowed' src={product.image} fluid />
-                    </Col>
-                    <Col md={3}>
-                        <ListGroup variant='flush'>
-                            <ListGroupItem>
-                                <h3 >{product.name}</h3>
-                            </ListGroupItem>
-                            <ListGroup.Item>
-                                <Rating
-                                    value={product.rating}
-                                    text={product.numReviews}
-                                />
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                Price: €{product.price}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                Description: {product.description}
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </Col>
-                    <Col>
-                        <Card>
+                <>
+                    <Meta title={product.name} />
+                    <Row>
+                        <Col md={6} >
+                            <Image className='rounded shadowed' src={product.image} fluid />
+                        </Col>
+                        <Col md={3}>
                             <ListGroup variant='flush'>
+                                <ListGroupItem>
+                                    <h3 >{product.name}</h3>
+                                </ListGroupItem>
                                 <ListGroup.Item>
-                                    <Row>
-                                        <Col>
-                                            <strong>
-                                                €{product.price}
-                                            </strong></Col>
-                                    </Row>
+                                    <Rating
+                                        value={product.rating}
+                                        text={product.numReviews}
+                                    />
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    <Row>
-                                        <Col>
-                                            <strong>
-                                                {product.countInStock > 0
-                                                    ? `In Stock: ${product.countInStock}`
-                                                    : 'Out of Stock'}
-                                            </strong></Col>
-                                    </Row>
+                                    Price: €{product.price}
                                 </ListGroup.Item>
-
-                                {product.countInStock > 0 && (
+                                <ListGroup.Item>
+                                    Description: {product.description}
+                                </ListGroup.Item>
+                            </ListGroup>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <ListGroup variant='flush'>
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>
-                                                Quantity
-                                            </Col>
-                                            <Col>
-                                                <Form.Control
-                                                    as='select'
-                                                    value={quantity}
-                                                    onChange={(element) =>
-                                                        setQuantity(element.target.value)
-                                                    }> {
-                                                        [...Array(product.countInStock).keys()].map((x) => (
-                                                            <option key={x + 1} value={x + 1}>
-                                                                {x + 1}
-                                                            </option>
-                                                        ))}
-                                                </Form.Control>
-                                            </Col>
+                                                <strong>
+                                                    €{product.price}
+                                                </strong></Col>
                                         </Row>
                                     </ListGroup.Item>
-                                )}
+                                    <ListGroup.Item>
+                                        <Row>
+                                            <Col>
+                                                <strong>
+                                                    {product.countInStock > 0
+                                                        ? `In Stock: ${product.countInStock}`
+                                                        : 'Out of Stock'}
+                                                </strong></Col>
+                                        </Row>
+                                    </ListGroup.Item>
 
-                                <ListGroup.Item>
-                                    <Button
-                                        onClick={addToCartHandler}
-                                        className=
-                                        {
-                                            product.countInStock > 0
-                                                ? 'btn-success '
-                                                : 'btn-danger '
-                                        }
-                                        type='button'
-                                        disabled={
-                                            product.countInStock < 1
-                                        }>
-                                        Add to Cart
-                                    </Button>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                    </Col>
-                </Row>
+                                    {product.countInStock > 0 && (
+                                        <ListGroup.Item>
+                                            <Row>
+                                                <Col>
+                                                    Quantity
+                                                </Col>
+                                                <Col>
+                                                    <Form.Control
+                                                        as='select'
+                                                        value={quantity}
+                                                        onChange={(element) =>
+                                                            setQuantity(element.target.value)
+                                                        }> {
+                                                            [...Array(product.countInStock).keys()].map((x) => (
+                                                                <option key={x + 1} value={x + 1}>
+                                                                    {x + 1}
+                                                                </option>
+                                                            ))}
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    )}
+
+                                    <ListGroup.Item>
+                                        <Button
+                                            onClick={addToCartHandler}
+                                            className=
+                                            {
+                                                product.countInStock > 0
+                                                    ? 'btn-success '
+                                                    : 'btn-danger '
+                                            }
+                                            type='button'
+                                            disabled={
+                                                product.countInStock < 1
+                                            }>
+                                            Add to Cart
+                                        </Button>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </Col>
+                    </Row>
                     <Row className='py-4'>
                         <Col md={6}>
                             <h2>

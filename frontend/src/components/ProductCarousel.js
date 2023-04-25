@@ -13,8 +13,8 @@ const ProductCarousel = () => {
     const productTopRated = useSelector((state) => state.productTopRated);
     const { loading, error, products } = productTopRated;
 
-    const productFeatured = useSelector((state) => state.productFeatured);
-    const { loadingFeatured, errorFeatured, productsFeatured } = productFeatured;
+    // const productFeatured = useSelector((state) => state.productFeatured);
+    // const { loadingFeatured, errorFeatured, productsFeatured } = productFeatured;
 
     useEffect(() => {
         dispatch(topRatedProducts());
@@ -28,7 +28,7 @@ const ProductCarousel = () => {
         <>
             {
                 option === 'featured'
-                    ? <Button variant='outline-success' onClick={() => { dispatch(topRatedProducts()); setOption("topRated"); }}>Top Rated</Button>
+                    ? <Button className='rounded btn-block' variant='outline-success' onClick={() => { dispatch(topRatedProducts()); setOption("topRated"); }}>Top Rated</Button>
                         ? option === 'topRated'
                         : <Button variant='outline-success' onClick={() => { dispatch(featuredProducts()); setOption("Featured"); }}>Featured</Button>
                     : ''
@@ -36,11 +36,11 @@ const ProductCarousel = () => {
             <Carousel pause='hover' className='bg-dark rounded'>
                 {products.map((product) => (
                     <Carousel.Item key={product._id}>
-                        <Link to={`/product/${product._id}`}>
+                        <Link to={`/products/${product._id}`}>
                             <Image src={product.image} alt={product.name} fluid />
                             <Carousel.Caption className='carousel-caption'>
                                 <h2>
-                                    {product.name} (${product.price})
+                                    {product.name} ({product.price}€)
                                 </h2>
                             </Carousel.Caption>
                         </Link>
