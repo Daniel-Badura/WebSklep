@@ -56,8 +56,14 @@ function App() {
             <Route path='/admin/users/list' element={<UsersListScreen />} />
             <Route path='/admin/users/:id/edit' element={<EditUserScreen />} />
             <Route path='/admin/products/list' element={<ProductListScreen />} />
+            <Route path='/admin/products/list/:pageNumber' element={<ProductListScreen />} />
             <Route path='/admin/products/:id/edit' element={<EditProductScreen />} />
             <Route path='/admin/orders/list' element={<OrderListScreen />} />
+            <Route path='/search/:keyword' element={<HomeScreen />} exact />
+
+            <Route path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
+            <Route path='/page/:pageNumber' element={<HomeScreen />} />
+
 
           </Routes>
         </Container>

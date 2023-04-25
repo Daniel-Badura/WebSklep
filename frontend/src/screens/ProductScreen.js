@@ -5,36 +5,65 @@ import { Card, Button, Row, Col, Image, ListGroup, ListGroupItem, Form } from 'r
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listProductDetails } from '../actions/productActions';
+import { Rating as Stars } from 'react-simple-star-rating';
+import { createProductReview, listProductDetails } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
+import { REVIEW_CREATE_RESET } from '../constants/productConstats';
 
 
 const ProductScreen = () => {
-
+    const { id: productId } = useParams();
     const [quantity, setQuantity] = useState(1);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
     const dispatch = useDispatch();
 
     const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product } = productDetails;
+
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+
+    const reviewCreate = useSelector(state => state.reviewCreate);
+    const { loading: loadingReview, success: successReview, error: errorReview } = reviewCreate;
+
     const { id } = useParams();
     const navigate = useNavigate();
     useEffect(() => {
+
+        if (successReview) {
+            alert('Review Submitted');
+            setRating(0);
+            setComment('');
+            dispatch({ type: REVIEW_CREATE_RESET });
+        }
         dispatch(listProductDetails(id));
-    }, [dispatch, id]);
+    }, [dispatch, id, successReview]);
 
 
     const addToCartHandler = () => {
         dispatch(addToCart(product._id, quantity));
         navigate('/cart');
     };
-
+    const submitHandler = (e) => {
+        e.preventDefault();
+        dispatch(
+            createProductReview(productId, {
+                rating,
+                comment,
+            })
+        );
+    };
+    const ratingHandler = (rate) => {
+        setRating(rate);
+    };
     return (
         <>
             <Link className='btn btn-warning my-3 rounded' to='/'>
                 Return
             </Link>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
-                <Row>
+                <><Row>
                     <Col md={6} >
                         <Image className='rounded shadowed' src={product.image} fluid />
                     </Col>
@@ -123,6 +152,60 @@ const ProductScreen = () => {
                         </Card>
                     </Col>
                 </Row>
+                    <Row className='py-4'>
+                        <Col md={6}>
+                            <h2>
+                                Reviews
+                            </h2>
+                            {product.reviews.length === 0 && <Message>No Reviews</Message>}
+                            <ListGroup variant='flush'>
+                                {product.reviews.map(review => (
+                                    <ListGroup.Item key={review._id}>
+                                        <strong>{review.name}</strong>
+                                        <Rating value={review.rating} />
+                                        <p>{review.createdAt.substring(0, 10)}</p>
+                                        <p>{review.comment}</p>
+                                    </ListGroup.Item>
+                                ))}
+
+
+                            </ListGroup>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item>
+                                <h2>Write a Review</h2>
+                                {successReview && (
+                                    <Message variant='success'>
+                                        Review submitted successfully
+                                    </Message>
+                                )}
+                                {loadingReview && <Loader />}
+                                {errorReview && (
+                                    <Message variant='danger'>{errorReview}</Message>
+                                )}
+
+                                {
+                                    userInfo &&
+                                    <Form onSubmit={submitHandler}>
+                                        <Form.Group controlId='rating'>
+                                            <Form.Label>Rating</Form.Label>
+                                            {/* <Form.Control as='select' value={rating} onChange={(e) => setRating(e.target.value)}> */}
+                                            <Stars onClick={ratingHandler} initialValue={rating} />
+                                            {/* </Form.Control> */}
+                                        </Form.Group>
+                                        <Form.Group controlId='rating'>
+                                            <Form.Label>Comment</Form.Label>
+                                            <Form.Control as='textarea' row='3' value={comment} onChange={(e) => setComment(e.target.value)}>
+
+                                            </Form.Control>
+                                        </Form.Group>
+                                        <Button className='my-3' type='submit' variant='success'>Submit</Button>
+                                    </Form>
+                                }
+                            </ListGroup.Item>
+                        </Col>
+                    </Row>
+                </>
             )
             }
         </>

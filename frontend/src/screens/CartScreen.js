@@ -53,7 +53,7 @@ const CartScreen = () => {
                     <Message>
                         <div style={{ display: 'flex' }}>
                             <div style={{ flex: 1 }}>Your cart is empty</div>
-                            <div style={{ flex: 0 }}><Button className={"rounded"} onClick={() => navigate('/')}>Return</Button></div>
+                            <div style={{ flex: 0 }}><Button variant='outline-info' className={"rounded"} onClick={() => navigate('/')}>Return</Button></div>
                         </div>
                     </Message>
                 ) : (

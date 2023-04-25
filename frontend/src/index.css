@@ -45,10 +45,7 @@
   .rounded-image {
   border-radius: 20px;
   }
-  
-  .rounded {
-  border-radius: 1rem;
-  }
+
   
   .form-control {
   border-radius: 1rem;
@@ -60,7 +57,9 @@
   }
   
   button {
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  justify-content: center;
   }
   
   .card-title {
@@ -140,4 +139,11 @@
  }
  .text-right{
   text-align: right;
+ }
+ .image-home{
+  height: 220px;
+  width: 220px;
+ }
+ .noborder{
+  border: none
  }

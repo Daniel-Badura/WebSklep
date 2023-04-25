@@ -16,6 +16,10 @@ import {
     PRODUCT_UPDATE_FAIL,
     PRODUCT_CREATE_RESET,
     PRODUCT_UPDATE_RESET,
+    REVIEW_CREATE_REQUEST,
+    REVIEW_CREATE_SUCCESS,
+    REVIEW_CREATE_FAIL,
+    REVIEW_CREATE_RESET,
 } from '../constants/productConstats.js';
 
 
@@ -24,7 +28,7 @@ export const productListReducer = (state = { products: [] }, action) => {
         case PRODUCT_LIST_REQUEST:
             return { loading: true, products: [] };
         case PRODUCT_LIST_SUCCESS:
-            return { loading: false, products: action.payload };
+            return { loading: false, products: action.payload.products, pages: action.payload.pages, page: action.payload.page };
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload };
         default: return state;
@@ -80,6 +84,20 @@ export const productDeleteReducer = (state = {}, action) => {
             return { loading: false, success: true };
         case PRODUCT_DELETE_FAIL:
             return { loading: false, error: action.payload };
+        default: return state;
+    }
+};
+
+export const reviewCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case REVIEW_CREATE_REQUEST:
+            return { loading: true };
+        case REVIEW_CREATE_SUCCESS:
+            return { loading: false, success: true };
+        case REVIEW_CREATE_FAIL:
+            return { loading: false, error: action.payload };
+        case REVIEW_CREATE_RESET:
+            return {};
         default: return state;
     }
 };

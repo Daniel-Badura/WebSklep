@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
-
+import SearchBox from './SearchBox';
 
 
 const Header = () => {
@@ -26,6 +26,7 @@ const Header = () => {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" variant="success" />
                     <Navbar.Collapse id="basic-navbar-nav">
+                        <SearchBox />
                         <Nav className="ms-auto">
                             <LinkContainer to='/cart'>
                                 <Nav.Link ><i className='fas fa-shopping-cart' />Cart</Nav.Link>
