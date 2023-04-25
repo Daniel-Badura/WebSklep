@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
+import morgan from "morgan";
 import path from 'path';
 import connectDB from "./config/db.js";
 import productRoutes from './routes/productRoutes.js';
@@ -9,7 +10,12 @@ import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { errorHandler, notFound, } from './middleware/errorMiddleware.js';
 
+
 const app = express();
+// 
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 const __dirname = path.resolve();
 // Use json
 app.use(express.json());
