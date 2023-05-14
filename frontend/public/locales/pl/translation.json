@@ -1,28 +1,49 @@
 {
-  "headNote": "Proszę pamiętać, że ta strona internetowa jest przeznaczona wyłącznie do celów prezentacyjnych i powinna być używana z rozwagą w celu osiągnięcia zamierzonego celu",
-  "search": "Szukaj",
-  "shoppingCart": "Koszyk",
-  "return": "Powrót",
-  "delete": "Usuń",
-  "name": "Nazwa",
-  "price": "Cena",
-  "category": "Kategoria",
-  "description": "Opis",
+  "address":"Adres",
+  "back": "Powrót",
   "brand": "Marka",
-  "image": "Obrazek",
-  "countInStock": "Dostępność",
-  "update": "Aktualizuj",
-  "topRated": "Najwyżej oceniane",
+  "category": "Kategoria",
+  "changeLanguage": "Zmień język",
+  "checkoutButton": "Zamówienie",
+  "countInStock": "Liczba sztuk w magazynie",
+  "continue":"Kontynuuj",
+  "delete": "Usuń",
+  "delivered": "Dostarczone",
+  "description": "Opis",
+  "edit": "Edytuj",
   "emailAddress": "Adres e-mail",
-  "phoneNumber": "Numer telefonu",
-  "featured": "Polecane",
   "emptyCartMessage": "Twój koszyk jest pusty",
-  "changeLanguage": "Zmień język"
+  "featured": "Polecane",
+  "fullName": "Imię i nazwisko",
+  "headNote": "Prosimy pamiętać, że ta strona jest przeznaczona wyłącznie do celów prezentacyjnych i powinna być używana rozważnie do jej zamierzonego celu",
+  "image": "Obraz",
+  "items": "Produkty",
+  "method":"Metoda",
+  "name": "Nazwa",
+  "notDelivered": "Nie dostarczono",
+  "notPaid": "Nie opłacono",
+  "paid": "Opłacono",
+  "paymentMethod":"Metoda płatności",
+  "phoneNumber": "Numer telefonu",
+  "price": "Cena",
+  "product": "Produkt",
+  "products": "Produkty",
+  "register":"Rejestracja",
+  "return": "Powrót",
+  "search": "Szukaj",
+  "signIn": "Zaloguj się",
+  "shipping": "Dostawa",
+  "shoppingCart": "Koszyk",
+  "subtotal": "Suma częściowa",
+  "tax": "Podatek",
+  "topRated": "Najlepiej oceniane",
+  "total": "Suma",
+  "update": "Aktualizuj",
   "checkout": {
-    "shipping": "Wysyłka",
+    "shipping": "Dostawa",
     "payment": "Płatność",
     "placeOrder": "Złóż zamówienie",
-    "checkout": "Kasa"
+    "checkout": "Zamówienie"
   },
   "languageDropdown": {
     "changeLanguage": "Zmień język"
@@ -38,7 +59,7 @@
     "profile": "Profil",
     "myOrders": "Moje zamówienia",
     "accountSettings": "Ustawienia konta",
-    "logout": "Wyloguj",
+    "logout": "Wyloguj się",
     "signIn": "Zaloguj się"
   },
 
@@ -46,7 +67,7 @@
     "loading": "Ładowanie ..."
   },
   "productCarousel": {
-    "topRated": "Najwyżej oceniane",
+    "topRated": "Najlepiej oceniane",
     "featured": "Polecane"
   },
   "searchBox": {
@@ -58,7 +79,7 @@
     "emptyCartMessage": "Twój koszyk jest pusty",
     "returnButton": "Powrót",
     "subtotal": "Suma częściowa",
-    "checkoutButton": "Przejdź do kasy"
+    "checkoutButton": "Zapłać"
   },
   "editProductScreen": {
     "return": "Powrót",
@@ -72,11 +93,11 @@
   "editUserScreen": {
     "return": "Powrót",
     "editUser": "Edytuj użytkownika",
-    "name": "Nazwa",
+    "name": "Imię",
     "lastname": "Nazwisko",
     "email": "Adres e-mail",
     "phone": "Numer telefonu",
-    "update": "Aktualizuj"
+    "update": "Zaktualizuj"
   },
 
   "homeScreen": {
@@ -86,6 +107,96 @@
     "back": "Powrót"
   },
   "myOrderScreen": {
+    "myOrders":"Moje zamówienia"
+  },
+  "orderListScreen": {
+    "allOrders": "Wszystkie zamówienia"
+  },
+  "orderScreen": {
+    "orderItems": "Elementy zamówienia",
+    "orderEmpty": "Twoje zamówienie jest puste",
+    "orderSummary": "Podsumowanie zamówienia",
+    "markDelivered": "Oznacz jako dostarczone"
+  },
+  "paymentScreen": {
+    "paymentMethod": "Metoda płatności",
+    "selectMethod": "Wybierz metodę"
+  },
+  "placeOrderScreen": {
     "back": "Powrót"
-  }
+  },
+  "productListScreen": {
+    "back": "Powrót"
+  },
+  "productScreen": {
+    "price":"Cena",
+    "description":"Opis",
+    "quantity":"Ilość",
+    "addToCart": "Dodaj do koszyka",
+    "reviews": "Opinie",
+    "noReviews": "Brak opinii",
+    "writeReview": "Napisz opinię",
+    "reviewSubmitted": "Opinia została dodana pomyślnie",
+    "comment": "Komentarz",
+    "submit":"Prześlij"
+},
+"profileScreen": {
+  "name":"Imię",
+  "lastname":"Nazwisko",
+  "emailAddress":"Adres e-mail",
+  "phoneNumber":"Numer telefonu",
+  "haveAccount": "Masz już konto?",
+  "password":"Hasło",
+  "update":"Aktualizuj"
+},
+"registerScreen": {
+  "back": "Powrót",
+  "name":"Imię",
+  "lastname":"Nazwisko",
+  "emailAddress":"Adres e-mail",
+  "phoneNumber":"Numer telefonu",
+  "haveAccount": "Masz już konto?",
+  "password":"Hasło",
+  "confirmPassword": "Potwierdź hasło"
+},
+"shippingScreen": {
+  "back": "Powrót",
+  "requestInvoice": "Wymagaj faktury",
+  "companyName": "Nazwa firmy",
+  "vatNumber": "Numer VAT",
+  "address": "Adres",
+  "city": "Miasto",
+  "postalCode": "Kod pocztowy",
+  "country": "Kraj",
+  "submit": "Wyślij"
+
+},
+"userAccountSettingsScreen": {
+  "accountSettings":"Ustawienia konta",
+  "back": "Powrót",
+  "profileUpdated": "Profil został pomyślnie zaktualizowany",
+  "emailAddress": "Adres e-mail",
+  "oldPassword" : "Stare hasło",
+  "password": "Hasło",
+  "newPassword": "Nowe hasło",
+  "confirmNewPassword": "Potwierdź nowe hasło",
+  "update":"Aktualizuj",
+  "removeAccount":"Usuń konto"    
+},
+"usersListScreen": {
+  "users": "Użytkownicy",
+  "name": "Imię",
+  "lastname": "Nazwisko",
+  "dateCreated": "Data utworzenia",
+  "back": "Powrót"
+},
+"verificationScreen": {
+  "verify": "Zweryfikuj swój adres e-mail:",
+  "enterCode": "Wpisz kod weryfikacyjny wysłany na Twój adres e-mail:",
+  "submit": "Wyślij"
+},
+
+"dictionary": {
+  "return": "Powrót"
+}
 }

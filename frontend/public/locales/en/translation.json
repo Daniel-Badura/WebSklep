@@ -1,25 +1,44 @@
 {
-  "headNote": "Please note that this website is intended solely for presentation purposes and should be used judiciously for its intended purpose",
-  "search": "Search",
-  "shoppingCart": "Shopping Cart",
-  "return": "Return",
-  "delete": "Delete",
-  "name": "Name",
-  "price": "Price",
-  "category": "Category",
-  "description": "Description",
+  "address":"Address",
+  "back": "Back",
   "brand": "Brand",
-  "image": "Image",
-  "countInStock": "Count in Stock",
-  "update": "Update",
-  "topRated": "Top Rated",
-  "emailAddress": "Email Address",
-  "phoneNumber": "Phone Number",
-  "featured": "Featured",
-  "emptyCartMessage": "Your cart is empty",
-  "subtotal": "Subtotal",
-  "checkoutButton": "Checkout",
+  "category": "Category",
   "changeLanguage": "Change Language",
+  "checkoutButton": "Checkout",
+  "countInStock": "Count in Stock",
+  "continue":"Continue",
+  "delete": "Delete",
+  "delivered": "Delivered",
+  "description": "Description",
+  "edit": "Edit",
+  "emailAddress": "Email Address",
+  "emptyCartMessage": "Your cart is empty",
+  "featured": "Featured",
+  "fullName": "Full Name",
+  "headNote": "Please note that this website is intended solely for presentation purposes and should be used judiciously for its intended purpose",
+  "image": "Image",
+  "items": "Items",
+  "method":"Method",
+  "name": "Name",
+  "notDelivered": "Not Delivered",
+  "notPaid": "Not Paid",
+  "paid": "Paid",
+  "paymentMethod":"Payment Method",
+  "phoneNumber": "Phone Number",
+  "price": "Price",
+  "product": "Product",
+  "products": "Products",
+  "register":"Register",
+  "return": "Return",
+  "search": "Search",
+  "signIn": "Sign in",
+  "shipping": "Shipping",
+  "shoppingCart": "Shopping Cart",
+  "subtotal": "Subtotal",
+  "tax": "Tax",
+  "topRated": "Top Rated",
+  "total": "Total",
+  "update": "Update",
   "checkout": {
     "shipping": "Shipping",
     "payment": "Payment",
@@ -88,16 +107,20 @@
     "back": "Back"
   },
   "myOrderScreen": {
-    "back": "Back"
+    "myOrders":"My Orders"
   },
   "orderListScreen": {
-    "back": "Back"
+    "allOrders": "All Orders"
   },
   "orderScreen": {
-    "back": "Back"
+    "orderItems": "Order Items",
+    "orderEmpty": "Your order is emtpty",
+    "orderSummary": "Order Summary",
+    "markDelivered": "Mark as delivered"
   },
   "paymentScreen": {
-    "back": "Back"
+    "paymentMethod": "Payment Method",
+    "selectMethod": "Select Method"
   },
   "placeOrderScreen": {
     "back": "Back"
@@ -106,21 +129,66 @@
     "back": "Back"
   },
   "productScreen": {
-    "back": "Back"
+    "price":"Price",
+    "description":"Description",
+    "quantity":"Quantity",
+    "addToCart": "Add to Cart",
+    "reviews": "Reviews",
+    "noReviews": "No Reviews",
+    "writeReview": "Write a Review",
+    "reviewSubmitted": "Review submitted successfully",
+    "comment": "Comment",
+    "submit":"Submit"
+
   },
   "profileScreen": {
-    "back": "Back"
+    "name":"Name",
+    "lastname":"Lastname",
+    "emailAddress":"Email Address",
+    "phoneNumber":"Phone Number",
+    "haveAccount": "Have an account?",
+    "password":"Password",
+    "update":"Update"
   },
   "registerScreen": {
-    "back": "Back"
+    "back": "Back",
+    "name":"Name",
+    "lastname":"Lastname",
+    "emailAddress":"Email Address",
+    "phoneNumber":"Phone Number",
+    "haveAccount": "Have an account?",
+    "password":"Password",
+    "confirmPassword": "Confirm Password"
   },
   "shippingScreen": {
-    "back": "Back"
+    "back": "Back",
+    "requestInvoice": "Request Invoice",
+    "companyName": "Company Name",
+    "vatNumber": "VAT Number",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "submit": "Submit"
+
   },
   "userAccountSettingsScreen": {
-    "back": "Back"
+    "accountSettings":"Account Settings",
+    "back": "Back",
+    "profileUpdated": "Profile successfully updated",
+    "emailAddress": "Email Address",
+    "oldPassword" : "Old Password",
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "update":"Update",
+    "removeAccount":"Remove Account"    
   },
-  "userListScreen": {
+  "usersListScreen": {
+    "users": "Users",
+    "name": "Name",
+    "lastname": "Lastname",
+    "dateCreated": "Date Created",
     "back": "Back"
   },
   "verificationScreen": {
