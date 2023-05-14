@@ -120,7 +120,7 @@ const ProductScreen = () => {
                       <Col>
                         <strong>
                           {product.countInStock > 0
-                            ? `In Stock: ${product.countInStock}`
+                            ? `${t("inStock")}: ${product.countInStock}`
                             : "Out of Stock"}
                         </strong>
                       </Col>
@@ -204,7 +204,7 @@ const ProductScreen = () => {
                 {userInfo && (
                   <Form onSubmit={submitHandler}>
                     <Form.Group controlId="rating">
-                      <Form.Label>Rating</Form.Label>
+                      <Form.Label> {t("rating")}</Form.Label>
                       {/* <Form.Control as='select' value={rating} onChange={(e) => setRating(e.target.value)}> */}
                       <Stars onClick={ratingHandler} initialValue={rating} />
                       {/* </Form.Control> */}

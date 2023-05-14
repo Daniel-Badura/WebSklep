@@ -125,7 +125,7 @@ const CartScreen = () => {
                   (accumulator, item) => accumulator + parseInt(item.quantity),
                   0
                 )}
-                ) items
+                ) {t("items")}
               </h3>
               €
               {cartItems

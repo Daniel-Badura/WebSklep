@@ -131,7 +131,7 @@ const UserAccountSettingsScreen = () => {
         <Form.Group controlId="changePassword" className="pt-2">
           <Form.Check
             type="checkbox"
-            label="Change Password"
+            label={t("changePassword")}
             checked={changePassword}
             onChange={(e) => setChangePassword(e.target.checked)}
           ></Form.Check>

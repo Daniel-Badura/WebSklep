@@ -4,6 +4,7 @@
   "brand": "Brand",
   "category": "Category",
   "changeLanguage": "Change Language",
+  "changePassword": "Change Password",
   "checkoutButton": "Checkout",
   "countInStock": "Count in Stock",
   "continue":"Continue",
@@ -17,6 +18,7 @@
   "fullName": "Full Name",
   "headNote": "Please note that this website is intended solely for presentation purposes and should be used judiciously for its intended purpose",
   "image": "Image",
+  "inStock": "In Stock",
   "items": "Items",
   "method":"Method",
   "name": "Name",
@@ -28,6 +30,7 @@
   "price": "Price",
   "product": "Product",
   "products": "Products",
+  "rating": "Rating",
   "register":"Register",
   "return": "Return",
   "search": "Search",
@@ -106,7 +109,7 @@
   "loginScreen": {
     "back": "Back"
   },
-  "myOrderScreen": {
+  "myOrdersScreen": {
     "myOrders":"My Orders"
   },
   "orderListScreen": {
@@ -123,7 +126,9 @@
     "selectMethod": "Select Method"
   },
   "placeOrderScreen": {
-    "back": "Back"
+    "cartEmpty" : "Your cart is empty",
+    "orderSummary":"Order Summary",
+    "submitOrder": "Submit Order"
   },
   "productListScreen": {
     "back": "Back"

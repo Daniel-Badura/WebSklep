@@ -4,6 +4,7 @@
   "brand": "Marka",
   "category": "Kategoria",
   "changeLanguage": "Zmień język",
+  "changePassword": "Zmień Hasło",
   "checkoutButton": "Zamówienie",
   "countInStock": "Liczba sztuk w magazynie",
   "continue":"Kontynuuj",
@@ -17,6 +18,7 @@
   "fullName": "Imię i nazwisko",
   "headNote": "Prosimy pamiętać, że ta strona jest przeznaczona wyłącznie do celów prezentacyjnych i powinna być używana rozważnie do jej zamierzonego celu",
   "image": "Obraz",
+  "inStock": "Ilość",
   "items": "Produkty",
   "method":"Metoda",
   "name": "Nazwa",
@@ -28,6 +30,7 @@
   "price": "Cena",
   "product": "Produkt",
   "products": "Produkty",
+  "rating": "Ocena",
   "register":"Rejestracja",
   "return": "Powrót",
   "search": "Szukaj",
@@ -106,7 +109,7 @@
   "loginScreen": {
     "back": "Powrót"
   },
-  "myOrderScreen": {
+  "myOrdersScreen": {
     "myOrders":"Moje zamówienia"
   },
   "orderListScreen": {
@@ -123,7 +126,9 @@
     "selectMethod": "Wybierz metodę"
   },
   "placeOrderScreen": {
-    "back": "Powrót"
+    "cartEmpty" : "Twój koszyk jest pusty",
+    "orderSummary":"Podsumowanie zamówienia",
+    "submitOrder": "Zamów"
   },
   "productListScreen": {
     "back": "Powrót"
@@ -161,7 +166,7 @@
 },
 "shippingScreen": {
   "back": "Powrót",
-  "requestInvoice": "Wymagaj faktury",
+  "requestInvoice": "Poproś o fakturę",
   "companyName": "Nazwa firmy",
   "vatNumber": "Numer VAT",
   "address": "Adres",
