@@ -1,4 +1,91 @@
 {
-  "header": "Witaj Podróżniku",
-  "headNote": "Pamiętaj, że ta strona internetowa jest przeznaczona wyłącznie do celów prezentacyjnych i należy z niej korzystać rozważnie, zgodnie z jej przeznaczeniem"
+  "headNote": "Proszę pamiętać, że ta strona internetowa jest przeznaczona wyłącznie do celów prezentacyjnych i powinna być używana z rozwagą w celu osiągnięcia zamierzonego celu",
+  "search": "Szukaj",
+  "shoppingCart": "Koszyk",
+  "return": "Powrót",
+  "delete": "Usuń",
+  "name": "Nazwa",
+  "price": "Cena",
+  "category": "Kategoria",
+  "description": "Opis",
+  "brand": "Marka",
+  "image": "Obrazek",
+  "countInStock": "Dostępność",
+  "update": "Aktualizuj",
+  "topRated": "Najwyżej oceniane",
+  "emailAddress": "Adres e-mail",
+  "phoneNumber": "Numer telefonu",
+  "featured": "Polecane",
+  "emptyCartMessage": "Twój koszyk jest pusty",
+  "changeLanguage": "Zmień język"
+  "checkout": {
+    "shipping": "Wysyłka",
+    "payment": "Płatność",
+    "placeOrder": "Złóż zamówienie",
+    "checkout": "Kasa"
+  },
+  "languageDropdown": {
+    "changeLanguage": "Zmień język"
+  },
+  "header": {
+    "websklep": "WebSklep",
+    "cart": "Koszyk",
+    "admin": "ADMIN",
+    "usersList": "Lista użytkowników",
+    "products": "Produkty",
+    "orders": "Zamówienia",
+    "emailVerification": "Weryfikacja e-mail",
+    "profile": "Profil",
+    "myOrders": "Moje zamówienia",
+    "accountSettings": "Ustawienia konta",
+    "logout": "Wyloguj",
+    "signIn": "Zaloguj się"
+  },
+
+  "loader": {
+    "loading": "Ładowanie ..."
+  },
+  "productCarousel": {
+    "topRated": "Najwyżej oceniane",
+    "featured": "Polecane"
+  },
+  "searchBox": {
+    "placeholder": "Szukaj produktów...",
+    "search": "Szukaj"
+  },
+  "cartScreen": {
+    "title": "Koszyk",
+    "emptyCartMessage": "Twój koszyk jest pusty",
+    "returnButton": "Powrót",
+    "subtotal": "Suma częściowa",
+    "checkoutButton": "Przejdź do kasy"
+  },
+  "editProductScreen": {
+    "return": "Powrót",
+    "editProduct": "Edytuj produkt",
+    "name": "Nazwa",
+    "price": "Cena",
+    "category": "Kategoria",
+    "description": "Opis",
+    "brand": "Marka"
+  },
+  "editUserScreen": {
+    "return": "Powrót",
+    "editUser": "Edytuj użytkownika",
+    "name": "Nazwa",
+    "lastname": "Nazwisko",
+    "email": "Adres e-mail",
+    "phone": "Numer telefonu",
+    "update": "Aktualizuj"
+  },
+
+  "homeScreen": {
+    "back": "Powrót"
+  },
+  "loginScreen": {
+    "back": "Powrót"
+  },
+  "myOrderScreen": {
+    "back": "Powrót"
+  }
 }

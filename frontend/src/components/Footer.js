@@ -4,9 +4,6 @@ import LanguageDropdown from './LanguageDropdown';
 
 const Footer = () => {
 
-
-
-
     return (<Row>
         <Col className='text-right py-3'>
             Copyright &copy; WebSklep

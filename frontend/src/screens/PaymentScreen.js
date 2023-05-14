@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Checkout from '../components/Checkout';
 import { savePaymentMethod } from '../actions/cartActions';
-
+import { useTranslation } from 'react-i18next';
 
 const PaymentScreen = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);

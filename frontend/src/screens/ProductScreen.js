@@ -10,9 +10,10 @@ import { createProductReview, listProductDetails } from '../actions/productActio
 import { addToCart } from '../actions/cartActions';
 import { REVIEW_CREATE_RESET } from '../constants/productConstats';
 import Meta from '../components/Meta';
-
+import { useTranslation } from 'react-i18next';
 
 const ProductScreen = () => {
+    const { t } = useTranslation();
     const { id: productId } = useParams();
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);

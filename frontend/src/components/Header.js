@@ -5,9 +5,11 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
 import SearchBox from './SearchBox';
+import { useTranslation } from 'react-i18next';
 
 
 const Header = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;

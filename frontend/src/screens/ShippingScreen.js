@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import { useNavigate } from 'react-router-dom';
 import Checkout from '../components/Checkout';
-
+import { useTranslation } from 'react-i18next';
 
 const ShippingScreen = () => {
-
+    const { t } = useTranslation();
     const cart = useSelector(state => state.cart);
     const { shippingAddress } = cart;
 

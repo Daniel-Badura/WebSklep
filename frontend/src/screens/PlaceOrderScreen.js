@@ -8,8 +8,9 @@ import { createOrder } from '../actions/orderActions';
 import { CART_RESET } from '../constants/cartConstants';
 import { USER_DETAILS_RESET } from '../constants/userConstants';
 import { ORDER_CREATE_RESET, } from '../constants/orderConstatns';
-
+import { useTranslation } from 'react-i18next';
 const PlaceOrderScreen = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const decimalize = (number) => {

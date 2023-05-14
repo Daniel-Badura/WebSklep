@@ -6,10 +6,11 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
+import { useTranslation } from 'react-i18next';
 
 
 const LoginScreen = () => {
-
+    const { t } = useTranslation();
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();

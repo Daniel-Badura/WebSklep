@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getMyOrders } from '../actions/orderActions';
-
+import { useTranslation } from 'react-i18next';
 
 
 const MyOrdersScreen = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

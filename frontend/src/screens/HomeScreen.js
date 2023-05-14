@@ -9,9 +9,11 @@ import { Link, useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
+import { useTranslation } from 'react-i18next';
 
 
 const HomeScreen = () => {
+    const { t } = useTranslation();
     const { keyword, pageNumber } = useParams();
     const dispatch = useDispatch();
 

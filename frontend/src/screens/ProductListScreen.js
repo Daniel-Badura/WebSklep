@@ -8,9 +8,9 @@ import { createProduct, deleteProduct, listProducts } from '../actions/productAc
 import { useNavigate, useParams } from 'react-router-dom';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstats';
 import Paginate from '../components/Paginate';
-
+import { useTranslation } from 'react-i18next';
 const ProductListScreen = () => {
-
+    const { t } = useTranslation();
     const { pageNumber } = useParams();
 
     const navigate = useNavigate();

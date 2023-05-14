@@ -7,13 +7,13 @@ import Loader from '../components/Loader';
 import { getUserDetails, updateUserDetails } from '../actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 import FormContainer from '../components/FormContainer';
-
+import { useTranslation } from 'react-i18next';
 
 
 
 
 const ProfileScreen = () => {
-
+    const { t } = useTranslation();
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -8,10 +8,12 @@ import FormContainer from '../components/FormContainer';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstats';
 import { listProductDetails, updateProduct } from '../actions/productActions';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 
 
 const EditProductScreen = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id: productId } = useParams();
@@ -97,11 +99,11 @@ const EditProductScreen = () => {
     return (
         <>
             <Link to='/admin/products/list' className='btn btn-light my-3' >
-                Return
+                {t('editProductScreen.return')}
             </Link>
             <FormContainer>
                 <h1>
-                    Edit Product
+                    {t('editProductScreen.editProduct')}
                 </h1>
                 {message && <Message variant='danger'> {message} </Message>}
                 {loadingUpdate && <Loader />}
@@ -111,7 +113,7 @@ const EditProductScreen = () => {
                 {loading ? <Loader /> :
                     <Form onSubmit={submitHandler}>
                         <Form.Group controlId='name' className='pt-2'>
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>{t('name')}</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Name'
@@ -121,7 +123,7 @@ const EditProductScreen = () => {
                         </Form.Group>
 
                         <Form.Group controlId='price' className='pt-2'>
-                            <Form.Label>Price</Form.Label>
+                            <Form.Label>{t('price')}</Form.Label>
                             <Form.Control
                                 type='number'
                                 placeholder='Price'
@@ -130,7 +132,7 @@ const EditProductScreen = () => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='category' className='pt-2'>
-                            <Form.Label>Category</Form.Label>
+                            <Form.Label>{t('category')}</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Category'
@@ -139,7 +141,7 @@ const EditProductScreen = () => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='description' className='pt-2'>
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>{t('description')}</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Description'
@@ -148,7 +150,7 @@ const EditProductScreen = () => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='brand' className='pt-2'>
-                            <Form.Label>Brand</Form.Label>
+                            <Form.Label>{t('brand')}</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Brand'
@@ -157,7 +159,7 @@ const EditProductScreen = () => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='image' className='pt-2'>
-                            <Form.Label>Image</Form.Label>
+                            <Form.Label>{t('image')}</Form.Label>
                             <Form.Control
                                 type='string'
                                 placeholder='Image url'
@@ -173,7 +175,7 @@ const EditProductScreen = () => {
                             {uploading && <Loader />}
                         </Form.Group>
                         <Form.Group controlId='countInStock' className='pt-2'>
-                            <Form.Label>CountInStock</Form.Label>
+                            <Form.Label>{t('countInStock')}</Form.Label>
                             <Form.Control
                                 type='number'
                                 placeholder='CountInStock'
@@ -190,7 +192,7 @@ const EditProductScreen = () => {
                             ></Form.Check>
                         </Form.Group>
                         <Button type='submit' variant='primary' className='text-center my-2'>
-                            Update
+                            {t('update')}
                         </Button>
                     </Form>
                 }

@@ -7,10 +7,12 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { getUserDetails, updateUser } from '../actions/userActions';
 import { USER_UPDATE_RESET } from '../constants/userConstants';
+import { useTranslation } from 'react-i18next';
 
 
 
 const EditUserScreen = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id: userId } = useParams();
@@ -52,11 +54,11 @@ const EditUserScreen = () => {
     };
     return (<>
         <Link to='/admin/users/list' className='btn btn-light my-3' >
-            Return
+            {t('return')}
         </Link>
         <FormContainer>
             <h1>
-                Edit User
+                {t('editUserScreen.editUser')}
             </h1>
             {message && <Message variant='danger'> {message} </Message>}
             {loadingUpdate && <Loader />}
@@ -66,7 +68,7 @@ const EditUserScreen = () => {
             {loading ? <Loader /> :
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='name' className='pt-2'>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>{t('name')}</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder='Name'
@@ -76,7 +78,7 @@ const EditUserScreen = () => {
                     </Form.Group>
 
                     <Form.Group controlId='lastname' className='pt-2'>
-                        <Form.Label>Lastname</Form.Label>
+                        <Form.Label>{t('lastname')}</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder='Lastname'
@@ -86,7 +88,7 @@ const EditUserScreen = () => {
                     </Form.Group>
 
                     <Form.Group controlId='email' className='pt-2'>
-                        <Form.Label>Email Address</Form.Label>
+                        <Form.Label>{t('emailAddress')}</Form.Label>
                         <Form.Control
                             type='email'
                             placeholder='Email Address'
@@ -96,7 +98,7 @@ const EditUserScreen = () => {
                     </Form.Group>
 
                     <Form.Group controlId='phone' className='pt-2'>
-                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Label>{t('phoneNumber')}</Form.Label>
                         <Form.Control
                             type='tel'
                             placeholder='Phone #'
@@ -121,7 +123,7 @@ const EditUserScreen = () => {
                         ></Form.Check>
                     </Form.Group>
                     <Button type='submit' variant='primary' className='text-center my-2'>
-                        Update
+                        {t('update')}
                     </Button>
                 </Form>
             }

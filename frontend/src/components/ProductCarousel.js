@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Loader from './Loader';
+// import Loader from './Loader';
 import Message from './Message';
 import { featuredProducts, topRatedProducts } from '../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Carousel, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ProductCarousel = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [option, setOption] = useState('featured');
 
@@ -21,16 +23,16 @@ const ProductCarousel = () => {
     }, [dispatch]);
 
     return loading ? (
-        <Loader />
+        <></>
     ) : error ? (
         <Message variant='danger'>{error}</Message>
     ) : (
         <>
             {
                 option === 'featured'
-                    ? <Button className='rounded btn-block' variant='outline-success' onClick={() => { dispatch(topRatedProducts()); setOption("topRated"); }}>Top Rated</Button>
+                    ? <Button className='rounded btn-block' variant='outline-success' onClick={() => { dispatch(topRatedProducts()); setOption("topRated"); }}>{t('topRated')}</Button>
                         ? option === 'topRated'
-                        : <Button variant='outline-success' onClick={() => { dispatch(featuredProducts()); setOption("Featured"); }}>Featured</Button>
+                        : <Button variant='outline-success' onClick={() => { dispatch(featuredProducts()); setOption("Featured"); }}>{t('featured')}</Button>
                     : ''
             }
             <Carousel pause='hover' className='bg-dark rounded'>

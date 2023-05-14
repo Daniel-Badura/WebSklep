@@ -6,9 +6,10 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { logout, deleteUser, listUsers } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const UsersListScreen = () => {
-
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();

@@ -8,8 +8,9 @@ import { deliverOrder, getOrderDetails, payOrder } from '../actions/orderActions
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstatns';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-
+import { useTranslation } from 'react-i18next';
 const OrderScreen = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const { id: orderId } = useParams();
     const dispatch = useDispatch();

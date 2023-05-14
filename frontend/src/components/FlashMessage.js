@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const FlashMessage = ({ message, duration }) => {
+
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {

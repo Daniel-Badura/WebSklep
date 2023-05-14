@@ -6,11 +6,11 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
-
+import { useTranslation } from 'react-i18next';
 
 
 const RegisterScreen = () => {
-
+    const { t } = useTranslation();
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();

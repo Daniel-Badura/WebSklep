@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, ListGroupItem } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import { useTranslation } from 'react-i18next';
 
 const CartScreen = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -45,12 +47,12 @@ const CartScreen = () => {
     return (
         <Row>
             <Col md={8}>
-                <h1>Shopping Cart</h1>
+                <h1>{t('shoppingCart')}</h1>
                 {cartItems.length === 0 ? (
                     <Message>
                         <div style={{ display: 'flex' }}>
-                            <div style={{ flex: 1 }}>Your cart is empty</div>
-                            <div style={{ flex: 0 }}><Button variant='outline-info' className={"rounded"} onClick={() => navigate('/')}>Return</Button></div>
+                            <div style={{ flex: 1 }}>{t('emptyCartMessage')}</div>
+                            <div style={{ flex: 0 }}><Button variant='outline-info' className={"rounded"} onClick={() => navigate('/')}>{t('return')}</Button></div>
                         </div>
                     </Message>
                 ) : (
@@ -91,7 +93,7 @@ const CartScreen = () => {
                                             variant='light'
                                             onClick={() => removeFromCartHandler(item.product)}
                                         >
-                                            <i className='fas fa-trash'>Delete</i>
+                                            <i className='fas fa-trash'>{t('delete')}</i>
                                         </Button>
                                     </Col>
                                 </Row>
@@ -106,13 +108,13 @@ const CartScreen = () => {
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <h3>
-                                Subtotal ({cartItems.reduce((accumulator, item) => accumulator + parseInt(item.quantity), 0)}) items
+                                {t('subtotal')} ({cartItems.reduce((accumulator, item) => accumulator + parseInt(item.quantity), 0)}) items
                             </h3>
                             €{cartItems.reduce((accumulator, item) => accumulator + item.quantity * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
                         <ListGroupItem>
                             <Button type='button' className='rounded btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
-                                Checkout
+                                {t('checkoutButton')}
                             </Button>
                         </ListGroupItem>
                     </ListGroup>
