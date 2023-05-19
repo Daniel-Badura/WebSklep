@@ -29,7 +29,6 @@ import UserAccountSettingsScreen from "./screens/UserAccountSettingsScreen";
 
 function App() {
   const { t } = useTranslation();
-
   return (
     <Suspense>
       <Router>
