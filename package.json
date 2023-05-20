@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/Daniel-Badura/WebSklep#readme",
   "dependencies": {
+    "@google-cloud/storage": "^6.10.1",
     "@reduxjs/toolkit": "^1.9.5",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
