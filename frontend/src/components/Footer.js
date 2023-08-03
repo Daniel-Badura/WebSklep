@@ -6,8 +6,10 @@ import i18n from "../i18n";
 const Footer = () => {
   return (
     <>
-      <Row>
-        <Col className="text-center">Copyright &copy; WebSklep</Col>
+      <Row className="text-center">
+        <Col className="text-right py-3">Copyright &copy; Websklep</Col>
+      </Row>
+      <Row className="text-center">
         <Col>
           <Button
             onClick={() => i18n.changeLanguage("en")}
