@@ -29,7 +29,7 @@ let credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 let bucketURL = process.env.GOOGLE_CLOUD_STORAGE_BUCKET_URL;
 let bucketName = process.env.GOOGLE_CLOUD_STORAGE_BUCKET_NAME;
 const storage = new Storage({
-  name: "websklep",
+  name: bucketName,
   projectId: projectId,
   credentials: credentials,
 });

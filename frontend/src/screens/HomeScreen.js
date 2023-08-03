@@ -26,6 +26,7 @@ const HomeScreen = () => {
   return (
     <>
       <Meta />
+
       {!keyword ? (
         <ProductCarousel />
       ) : (

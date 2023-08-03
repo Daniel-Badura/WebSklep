@@ -1,152 +1,166 @@
 /* Define the animation */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @keyframes slideDown {
   from {
-  opacity: 0;
-  transform: translateY(-10%);
+    opacity: 0;
+    transform: translateY(-10%);
   }
   to {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
-  }
-  
-  .main {
+}
+.main {
   min-height: 80vh;
-  }
-  
-  .h3 {
+}
+
+.h3 {
   padding: 1rem 0;
-  }
-  
-  .link {
+}
+
+.link {
   text-decoration: none;
   font-weight: bold;
-  }
-  
-  .link:hover {
+}
+
+.link:hover {
   text-decoration: underline;
-  }
-  
-  .text-centered {
+}
+
+.text-centered {
   text-align: center;
-  }
-  
-  .warning-message {
+}
+
+.warning-message {
   text-align: center;
   color: red;
   margin-left: 20%;
   margin-right: 20%;
-  }
-  
-  .rating span {
-  margin: 0.0rem;
-  }
-  
-  .rounded-image {
-  border-radius: 20px;
-  }
+}
 
-  
-  .form-control {
+.rating span {
+  margin: 0rem;
+}
+
+.rounded-image {
+  border-radius: 20px;
+}
+
+.form-control {
   border-radius: 1rem;
-  min-width: 4rem
-  }
-  
-  .shadowed {
+  min-width: 4rem;
+}
+
+.shadowed {
   box-shadow: 0 1rem 1rem rgba(253, 94, 1, 0.3);
-  }
-  
-  button {
+}
+
+button {
   border-radius: 0.5rem;
   text-align: center;
   justify-content: center;
-  }
-  
-  .card-title {
+}
+
+.card-title {
   height: 3rem;
-  }
-  
-  .p-4 {
+}
+
+.p-4 {
   transition-duration: 1s;
-  }
-  
-  .p-1 {
+}
+
+.p-1 {
   transition-duration: 1s;
-  }
-  
-  .enlarge:hover {
+}
+
+.enlarge:hover {
   transition-duration: 1s;
   transform: scale(1.2);
-  }
-  
-  .enlarge {
-  transition-duration: 1s;
-  }
+}
 
-  .big{
-    font-size: 200%;
-  }
-  
-  .move-right:hover {
+.enlarge {
+  transition-duration: 1s;
+}
+
+.big {
+  font-size: 200%;
+}
+
+.move-right:hover {
   padding-left: 3rem;
   transition-duration: 1s;
-  }
-  
-  .move-right {
+}
+
+.move-right {
   transition-duration: 1s;
-  }
-  .red{
-    color:red;
-  }
-  .blue{
-    color:blue;
-  }
-  .green{
-    color:green;
-  }
-  
-  @media (hover: hover) {
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.green {
+  color: green;
+}
+
+@media (hover: hover) {
   .highlight:hover {
-  box-shadow: 0 1rem 1rem rgba(1, 1, 1, 0.3);
-  transform: scale(1.05);
+    box-shadow: 0 1rem 1rem rgba(1, 1, 1, 0.3);
+    transform: scale(1.05);
   }
-  }
-  
-  .slide-enter {
+}
+
+.slide-enter {
   transform: translateX(100%);
-  }
-  
-  .slide-enter-active {
+}
+
+.slide-enter-active {
   transform: translateX(0%);
   transition: transform 300ms ease-in-out;
-  }
-  
-  .slide-exit {
+}
+
+.slide-exit {
   transform: translateX(0%);
-  }
-  
-  .slide-exit-active {
+}
+
+.slide-exit-active {
   transform: translateX(-100%);
   transition: transform 300ms ease-in-out;
-  }
-  
-  .dropdown-menu {
+}
+
+.dropdown-menu {
   animation: slideDown 0.4s ease-in-out;
   border-radius: 10%;
-  }
- .block {
+}
+.block {
   display: inline-block;
- }
- .text-right{
+}
+.text-right {
   text-align: right;
- }
- .image-home{
+}
+.image-home {
   height: 220px;
   width: 220px;
- }
- .noborder{
-  border: none
- }
+}
+.noborder {
+  border: none;
+}
+.polish {
+  background-image: url("/public/images/pl.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.english {
+  background-image: url("/public/images/us.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 /* carousel */
 .carousel-item-next,
@@ -160,11 +174,11 @@
   padding: 10px;
   box-sizing: border-box;
 }
- 
+
 .carousel-caption h2 {
   color: black;
 }
- 
+
 .carousel img {
   height: 300px;
   padding: 40px;
@@ -176,27 +190,28 @@
 .carousel a {
   margin: 0 auto;
 }
- 
+
 @media (max-width: 900px) {
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
 }
-.carousel-inner{
- background-color: white;
+.carousel-inner {
+  background-color: white;
   border: solid black;
   border-radius: 5%;
 }
-.carousel-control-next, .carousel-control-prev{
+.carousel-control-next,
+.carousel-control-prev {
   color: teal;
-  background:black
+  background: black;
 }
-.carousel-indicators [data-bs-target]{
+.carousel-indicators [data-bs-target] {
   color: teal;
-  background:black
+  background: black;
 }
-@import '~mdb-ui-kit/css/mdb.min.css';
+@import "~mdb-ui-kit/css/mdb.min.css";
 
-.form-control.is-valid{
+.form-control.is-valid {
   margin-bottom: 0;
 }
