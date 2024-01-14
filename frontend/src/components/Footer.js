@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import LanguageDropdown from "./LanguageDropdown";
 import i18n from "../i18n";
 
 const Footer = () => {

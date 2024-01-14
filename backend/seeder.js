@@ -1,47 +1,46 @@
-import users from './data/users.js';
-import products from './data/products.js';
-import User from './models/userModel.js';
-import Product from './models/productModel.js';
-import Order from './models/orderModel.js';
+import users from "./data/users.js";
+import products from "./data/products.js";
+import User from "./models/userModel.js";
+import Product from "./models/productModel.js";
+import Order from "./models/orderModel.js";
 import connectDB from "./config/db.js";
-
 
 connectDB();
 
 const importData = async () => {
-    try {
-        await Order.deleteMany();
-        await Product.deleteMany();
-        await User.deleteMany();
+  try {
+    await Order.deleteMany();
+    await Product.deleteMany();
+    await User.deleteMany();
 
-        const createdUsers = await User.insertMany(users);
-        const adminUser = createdUsers[0]._id;
-        const sampleProducts = products.map(product => {
-            return { ...product, user: adminUser };
-        });
-        await Product.insertMany(sampleProducts);
+    const createdUsers = await User.insertMany(users);
+    const adminUser = createdUsers[0]._id;
+    const sampleProducts = products.map((product) => {
+      return { ...product, user: adminUser };
+    });
+    await Product.insertMany(sampleProducts);
 
-        console.log('Data successfully imported!'.green.inverse);
-    } catch (error) {
-        console.error(`${error}`.red.inverse);
-        process.exit(1);
-    };
+    console.log("Data successfully imported!".green.inverse);
+  } catch (error) {
+    console.error(`${error}`.red.inverse);
+    process.exit(1);
+  }
 };
 
 const removeData = async () => {
-    try {
-        await Order.deleteMany();
-        await Product.deleteMany();
-        await User.deleteMany();
-        console.log('Data successfully removed!'.red.inverse);
-    } catch (error) {
-        console.error(`${error}`.red.inverse);
-        process.exit(1);
-    };
+  try {
+    await Order.deleteMany();
+    await Product.deleteMany();
+    await User.deleteMany();
+    console.log("Data successfully removed!".red.inverse);
+  } catch (error) {
+    console.error(`${error}`.red.inverse);
+    process.exit(1);
+  }
 };
 
-if (process.argv[2] === '-d') {
-    removeData();
+if (process.argv[2] === "-d") {
+  removeData();
 } else {
-    importData();
+  importData();
 }
